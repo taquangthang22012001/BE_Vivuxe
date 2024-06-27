@@ -1,6 +1,7 @@
 package com.vti.vivuxe.controller;
 
 import com.vti.vivuxe.dto.request.UserCreationRequest;
+import com.vti.vivuxe.dto.request.UserDto;
 import com.vti.vivuxe.entity.User;
 import com.vti.vivuxe.exception.DuplicateFieldException;
 import com.vti.vivuxe.service.UserService;
@@ -26,13 +27,13 @@ public class UserController {
 	}
 
 	@GetMapping()
-	public ResponseEntity<List<User>> getAllUsers(){
-		return ResponseEntity.ok(userService.getAllUsers());
+	public List<UserDto> getAllUsers(){
+		return userService.getAllUsers();
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<User> getUserById(@PathVariable Long id) throws NoSuchElementException {
-		return ResponseEntity.ok(userService.getUserById(id));
+	public UserDto getUserById(@PathVariable Long id)  {
+		return userService.getUserById(id);
 	}
 
 	@PutMapping("/{id}")

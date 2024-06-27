@@ -1,6 +1,9 @@
 package com.vti.vivuxe.service;
 
+import com.vti.vivuxe.dto.request.CarDto;
 import com.vti.vivuxe.dto.request.UserCreationRequest;
+import com.vti.vivuxe.dto.request.UserDto;
+import com.vti.vivuxe.entity.Car;
 import com.vti.vivuxe.entity.User;
 import com.vti.vivuxe.exception.DuplicateFieldException;
 import com.vti.vivuxe.repository.UserRepository;
@@ -11,16 +14,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
-public class UserService {
+public class UserService implements UserSeverInter{
 	@Autowired
 	ModelMapper modelMapper;
 	@Autowired
 	private UserRepository userRepository;
 
-	public List<User> getAllUsers() {
-		return userRepository.findAll();
+	public List<UserDto> getAllUsers() {
+		List<User> users =  userRepository.findAll();
+		return users.stream()
+				.map(user -> modelMapper.map(user, UserDto.class))
+				.collect(Collectors.toList());
 	}
 
 	public User createUser(UserCreationRequest request) throws DuplicateFieldException {
@@ -49,11 +56,9 @@ public class UserService {
 		}
 	}
 
-	public User getUserById(Long id) throws NoSuchElementException {
+	public UserDto getUserById(Long id) {
 		return userRepository.findById(id)
-				.orElseThrow(() -> {
-					throw new NoSuchElementException("User not found with id: " + id);
-				});
+				.map(user -> modelMapper.map(user,UserDto.class)).orElse(null);
 	}
 
 	public User updateUser(Long id, UserCreationRequest request) {
