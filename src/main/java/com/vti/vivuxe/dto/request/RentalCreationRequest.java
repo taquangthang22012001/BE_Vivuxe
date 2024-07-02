@@ -7,8 +7,8 @@ import java.util.Date;
 
 @Data
 public class RentalCreationRequest {
-    private Long userUserId;
-    private Long carCarId;
+    private Long userId;
+    private Long carId;
     private Date rentalDate;
     private Date rentalReturn;
     private Status status;

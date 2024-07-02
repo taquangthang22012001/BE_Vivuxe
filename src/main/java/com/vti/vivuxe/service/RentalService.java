@@ -11,6 +11,7 @@ import com.vti.vivuxe.repository.UserRepository;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,6 @@ import java.util.Optional;
 @Service
 @NoArgsConstructor
 public class RentalService implements RentalServiceImp {
-
 	@Autowired
 	private ModelMapper modelMapper;
 
@@ -40,20 +40,23 @@ public class RentalService implements RentalServiceImp {
 		this.userRepository = userRepository;
 	}
 
-	public Rental createRental(RentalCreationRequest request) {
-		Rental rental = modelMapper.map(request, Rental.class);
 
-		User user = userRepository.findById(request.getUserUserId())
+	public RentalDTO createRental(RentalCreationRequest request) {
+
+
+		User user = userRepository.findById(request.getUserId())
 				.orElseThrow(() -> new RuntimeException("User not found"));
 
-		Car car = carRepository.findById(request.getCarCarId())
+		Car car = carRepository.findById(request.getCarId())
 				.orElseThrow(() -> new RuntimeException("Car not found"));
-
+		Rental rental = modelMapper.map(request, Rental.class);
 		rental.setUser(user);
-
 		rental.setCar(car);
+		// Lưu Rental vào cơ sở dữ liệu
+		Rental savedRental = rentalRepository.save(rental);
 
-		return rentalRepository.save(rental);
+		// Ánh xạ và trả về DTO của Rental đã lưu
+		return  modelMapper.map(savedRental,RentalDTO.class);
 	}
 
 	public Page<RentalDTO> getAllRentals(Pageable pageable) {

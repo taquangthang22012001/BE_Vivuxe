@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface RentalServiceImp {
-	Rental createRental(RentalCreationRequest request);
+	RentalDTO createRental(RentalCreationRequest request);
 	Page<RentalDTO> getAllRentals(Pageable pageable);
 	RentalDTO getRentalById(Long id);
 	Rental updateRental(Long id, RentalCreationRequest request);

@@ -9,6 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,12 +34,13 @@ public class CarService implements CarServiceImp {
         this.userRepository = userRepository;
     }
 
-    public List<CarDTO> getAllCars() {
+    public Page<CarDTO> getAllCars(Pageable pageable) {
 
-		List<Car> cars = carRepository.findAll();
-		return cars.stream()
+		Page<Car> carPage = carRepository.findAll(pageable);
+		List<CarDTO> carDTOs = carPage.stream()
 				.map(car -> modelMapper.map(car, CarDTO.class))
 				.collect(Collectors.toList());
+		return new PageImpl<>(carDTOs,pageable,carPage.getTotalElements());
 	}
 
 	public CarDTO getCarById(Long id) {

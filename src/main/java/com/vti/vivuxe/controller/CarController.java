@@ -5,6 +5,9 @@ import com.vti.vivuxe.dto.response.admin.CarDTO;
 import com.vti.vivuxe.entity.Car;
 import com.vti.vivuxe.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +20,9 @@ public class CarController {
     @Autowired
     private CarService carService;
     @GetMapping()
-    public List<CarDTO> getAllCars() {
-        return carService.getAllCars();
+    public Page<CarDTO> getAllCars(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page,size);
+        return carService.getAllCars(pageable);
     }
 
     @PostMapping()
