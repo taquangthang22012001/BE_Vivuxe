@@ -1,81 +1,67 @@
 package com.vti.vivuxe.service;
 
-import com.vti.vivuxe.dto.request.CarDto;
 import com.vti.vivuxe.dto.request.UserCreationRequest;
-import com.vti.vivuxe.dto.request.UserDto;
-import com.vti.vivuxe.entity.Car;
+import com.vti.vivuxe.dto.response.admin.UserDTO;
 import com.vti.vivuxe.entity.User;
-import com.vti.vivuxe.exception.DuplicateFieldException;
 import com.vti.vivuxe.repository.UserRepository;
-import com.vti.vivuxe.utils.DateValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
-public class UserService implements UserSeverInter{
+public class UserService implements UserServiceImp {
 	@Autowired
-	ModelMapper modelMapper;
+	private ModelMapper modelMapper;
+
 	@Autowired
 	private UserRepository userRepository;
 
-	public List<UserDto> getAllUsers() {
-		List<User> users =  userRepository.findAll();
-		return users.stream()
-				.map(user -> modelMapper.map(user, UserDto.class))
-				.collect(Collectors.toList());
+	public UserService(UserRepository userRepository) {
+		this.userRepository = userRepository;
 	}
 
-	public User createUser(UserCreationRequest request) throws DuplicateFieldException {
+	public Page<UserDTO> getAllUsers(Pageable pageable) {
+		Page<User> users = userRepository.findAll(pageable);
 
-		if (userRepository.existsByUsername(request.getUsername())) {
-			throw new DuplicateFieldException("Username is already existed!");
-		} else if (userRepository.existsByDriverLicense(request.getDriverLicense())) {
-			throw new DuplicateFieldException("Driver License is already existed");
-		} else if (userRepository.existsByEmail(request.getEmail())) {
-			throw new DuplicateFieldException("Email is already existed");
-		} else if (userRepository.existsByPhone(request.getPhone())) {
-			throw new DuplicateFieldException("Phone number is already existed!");
-		} else {
-			//			validate date format
-			if (!DateValidator.valDate(request.getDob())) {
-				throw new IllegalArgumentException("Invalid date format!");
-			}
+		Page<UserDTO> userDTOS = users.map(user -> modelMapper.map(user, UserDTO.class));
 
-//			validate if date is in the past
-			if (!DateValidator.valDate(request.getDob())) {
-				throw new IllegalArgumentException("Invalid date");
-			}
+		return userDTOS;
+	}
 
-			User user = modelMapper.map(request, User.class);
-			return userRepository.save(user);
+	public User createUser(UserCreationRequest request) {
+		Boolean existingUser = userRepository.existsByUsername(request.getUsername());
+
+		if (existingUser) {
+			throw new RuntimeException("Username is already existed!");
 		}
+
+		User user = modelMapper.map(request, User.class);
+		return userRepository.save(user);
 	}
 
-	public UserDto getUserById(Long id) {
+	public UserDTO getUserById(Long id) {
+		Optional<User> optionalUser = userRepository.findById(id);
+
+		if (optionalUser.isEmpty()) {
+			throw new RuntimeException("User not found with id: " + id);
+		}
+
 		return userRepository.findById(id)
-				.map(user -> modelMapper.map(user,UserDto.class)).orElse(null);
+				.map(user -> modelMapper.map(user, UserDTO.class)).orElse(null);
 	}
 
 	public User updateUser(Long id, UserCreationRequest request) {
-		if (!userRepository.existsById(id)) {
-			throw new NoSuchElementException("User not found with id: " + id);
-		} else {
+		User user = userRepository.findById(id)
+				.orElseThrow(() -> new NoSuchElementException("User not found with " + id));
 
-//			validate date format
-			if (!DateValidator.valDate(request.getDob())) {
-				throw new IllegalArgumentException("Invalid date format!");
-			}
+		modelMapper.map(request, user);
 
-			User user = userRepository.findById(id).get();
-			modelMapper.map(request, user);
-
-			return userRepository.save(user);
-		}
+		return userRepository.save(user);
 	}
 
 	public void deleteUser(Long id) {

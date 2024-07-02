@@ -1,38 +1,36 @@
 package com.vti.vivuxe.controller;
 
-import com.vti.vivuxe.Form.CarCreate;
-import com.vti.vivuxe.dto.request.CarDto;
+import com.vti.vivuxe.dto.request.CarCreationRequest;
+import com.vti.vivuxe.dto.response.admin.CarDTO;
 import com.vti.vivuxe.entity.Car;
-import com.vti.vivuxe.exception.DuplicateFieldException;
 import com.vti.vivuxe.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-
+@RequestMapping("api/v1/cars")
 public class CarController {
     @Autowired
     private CarService carService;
-    @GetMapping("/api/cars")
-    public List<CarDto> getAllCars() {
+    @GetMapping()
+    public List<CarDTO> getAllCars() {
         return carService.getAllCars();
     }
 
-    @PostMapping("/api/cars/create")
-    public CarDto createCar(@RequestBody CarCreate carCreate) {
-       return carService.createCar(carCreate);
+    @PostMapping()
+    public CarDTO createCar(@RequestBody CarCreationRequest carCreationRequest) {
+       return carService.createCar(carCreationRequest);
     }
 
-    @GetMapping("/api/cars/{id}")
-    public CarDto getCarById(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public CarDTO getCarById(@PathVariable Long id) {
         return  carService.getCarById(id);
     }
-    @PutMapping("/api/cars/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Car> updateCar(@PathVariable Long id, @RequestBody Car car) {
         try {
             return ResponseEntity.ok(carService.updateCar(id, car));
@@ -40,7 +38,7 @@ public class CarController {
             return ResponseEntity.notFound().build();
         }
     }
-    @DeleteMapping("api/cars/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCar(@PathVariable Long id) {
         try {
             carService.deleteCar(id);

@@ -1,0 +1,208 @@
+[
+    {
+        "username": "john_doe",
+        "password": "password123",
+        "email": "john_doe@example.com",
+        "phone": "5551234567",
+        "dob": "2024-06-25",
+        "driverLicense": "D1234567",
+        "address": "123 Main St, New York, NY 10001",
+        "gender": "MALE"
+    },
+    {
+        "username": "jane_smith",
+        "password": "password789",
+        "email": "jane_smith@example.com",
+        "phone": "5558765432",
+        "dob": "1995-04-15",
+        "driverLicense": "D1234568",
+        "address": "789 Maple Ave, New York, NY 10003",
+        "gender": "FEMALE"
+    },
+    {
+        "username": "michael_jones",
+        "password": "mikepassword123",
+        "email": "michael_jones@example.com",
+        "phone": "5553456789",
+        "dob": "1988-12-12",
+        "driverLicense": "D2345678",
+        "address": "321 Oak St, New York, NY 10004",
+        "gender": "MALE"
+    },
+    {
+        "username": "lisa_brown",
+        "password": "lisapassword456",
+        "email": "lisa_brown@example.com",
+        "phone": "5556543210",
+        "dob": "1992-08-02",
+        "driverLicense": "D3456789",
+        "address": "654 Pine Rd, New York, NY 10005",
+        "gender": "FEMALE"
+    },
+    {
+        "username": "william_davis",
+        "password": "willyd789",
+        "email": "william_davis@example.com",
+        "phone": "5557890123",
+        "dob": "1975-03-19",
+        "driverLicense": "D4567890",
+        "address": "987 Cedar Blvd, New York, NY 10006",
+        "gender": "MALE"
+    },
+    {
+        "username": "emily_clark",
+        "password": "emilypassword123",
+        "email": "emily_clark@example.com",
+        "phone": "5550123456",
+        "dob": "1985-07-10",
+        "driverLicense": "D5678901",
+        "address": "321 Birch St, New York, NY 10007",
+        "gender": "FEMALE"
+    },
+    {
+        "username": "daniel_moore",
+        "password": "danpassword456",
+        "email": "daniel_moore@example.com",
+        "phone": "5552345678",
+        "dob": "1990-05-25",
+        "driverLicense": "D6789012",
+        "address": "456 Spruce Ln, New York, NY 10008",
+        "gender": "MALE"
+    },
+    {
+        "username": "sarah_miller",
+        "password": "sarahpassword789",
+        "email": "sarah_miller@example.com",
+        "phone": "5556789123",
+        "dob": "1999-05-21",
+        "driverLicense": "D7890123",
+        "address": "789 Walnut St, New York, NY 10009",
+        "gender": "FEMALE"
+    },
+    {
+        "username": "david_wilson",
+        "password": "davepassword123",
+        "email": "david_wilson@example.com",
+        "phone": "5559012345",
+        "dob": "1982-09-30",
+        "driverLicense": "D8901234",
+        "address": "987 Chestnut Ave, New York, NY 10010",
+        "gender": "MALE"
+    },
+    {
+        "username": "laura_jones",
+        "password": "laurapassword456",
+        "email": "laura_jones@example.com",
+        "phone": "5553456789",
+        "dob": "2001-05-25",
+        "driverLicense": "D9012345",
+        "address": "123 Palm Dr, New York, NY 10011",
+        "gender": "FEMALE"
+    }
+]
+
+
+----------------------------------UPDATE FIELDS---------------------------------------------
+
+[
+    {
+        "username": "john_doe_updated",
+        "password": "newpassword456",
+        "email": "john_doe_updated@example.com",
+        "phone": "5551234567",
+        "dob": "2024-06-25",
+        "driverLicense": "D1234567",
+        "address": "456 Elm St, New York, NY 10002",
+        "gender": "MALE"
+    },
+    {
+        "username": "jane_smith_updated",
+        "password": "newpassword123",
+        "email": "jane_smith_updated@example.com",
+        "phone": "5558765432",
+        "dob": "1995-04-15",
+        "driverLicense": "D1234568",
+        "address": "321 Maple Ave, New York, NY 10003",
+        "gender": "FEMALE"
+    },
+    {
+        "username": "michael_jones_updated",
+        "password": "mikenewpassword789",
+        "email": "michael_jones_updated@example.com",
+        "phone": "5553456789",
+        "dob": "1988-12-12",
+        "driverLicense": "D2345678",
+        "address": "654 Oak St, New York, NY 10004",
+        "gender": "MALE"
+    },
+    {
+        "username": "lisa_brown_updated",
+        "password": "lisanewpassword456",
+        "email": "lisa_brown_updated@example.com",
+        "phone": "5556543210",
+        "dob": "1992-08-02",
+        "driverLicense": "D3456789",
+        "address": "987 Pine Rd, New York, NY 10005",
+        "gender": "FEMALE"
+    },
+    {
+        "username": "william_davis_updated",
+        "password": "willydnew456",
+        "email": "william_davis_updated@example.com",
+        "phone": "5557890123",
+        "dob": "1975-03-19",
+        "driverLicense": "D4567890",
+        "address": "123 Cedar Blvd, New York, NY 10006",
+        "gender": "MALE"
+    },
+    {
+        "username": "emily_clark_updated",
+        "password": "emilynewpassword123",
+        "email": "emily_clark_updated@example.com",
+        "phone": "5550123456",
+        "dob": "1985-07-10",
+        "driverLicense": "D5678901",
+        "address": "456 Birch St, New York, NY 10007",
+        "gender": "FEMALE"
+    },
+    {
+        "username": "daniel_moore_updated",
+        "password": "dannewpassword456",
+        "email": "daniel_moore_updated@example.com",
+        "phone": "5552345678",
+        "dob": "1990-05-25",
+        "driverLicense": "D6789012",
+        "address": "789 Spruce Ln, New York, NY 10008",
+        "gender": "MALE"
+    },
+    {
+        "username": "sarah_miller_updated",
+        "password": "sarahnewpassword789",
+        "email": "sarah_miller_updated@example.com",
+        "phone": "5556789123",
+        "dob": "1999-05-21",
+        "driverLicense": "D7890123",
+        "address": "987 Walnut St, New York, NY 10009",
+        "gender": "FEMALE"
+    },
+    {
+        "username": "david_wilson_updated",
+        "password": "davenewpassword123",
+        "email": "david_wilson_updated@example.com",
+        "phone": "5559012345",
+        "dob": "1982-09-30",
+        "driverLicense": "D8901234",
+        "address": "123 Chestnut Ave, New York, NY 10010",
+        "gender": "MALE"
+    },
+    {
+        "username": "laura_jones_updated",
+        "password": "lauranewpassword456",
+        "email": "laura_jones_updated@example.com",
+        "phone": "5553456789",
+        "dob": "2001-05-25",
+        "driverLicense": "D9012345",
+        "address": "456 Palm Dr, New York, NY 10011",
+        "gender": "FEMALE"
+    }
+]

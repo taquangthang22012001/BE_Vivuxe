@@ -1,8 +1,9 @@
 package com.vti.vivuxe.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vti.vivuxe.enums.Gender;
+import com.vti.vivuxe.enums.Role;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,6 +31,7 @@ public class User {
 	private String phone;
 
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private String dob;
 
 	@Column(name = "driver_license", unique = true)
@@ -44,30 +46,26 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
+	@Enumerated(EnumType.STRING)
+	private Role role;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Rental> rentals;
+
 	@PrePersist
 	protected void onCreate() {
-		if(this.createDate == null){
+		if (this.createDate == null) {
 			this.createDate = new Date();
+		}
+
+		if (this.role == null){
+			this.role = Role.USER;
+		}
+
+		if(this.gender == null){
+			this.gender = Gender.UNKNOWN;
 		}
 	}
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Car> carList;
 
-	@Override
-	public String toString() {
-		return "User{" +
-				"userId=" + userId +
-				", username='" + username + '\'' +
-				", password='" + password + '\'' +
-				", email='" + email + '\'' +
-				", phone='" + phone + '\'' +
-				", dob=" + dob +
-				", driverLicense='" + driverLicense + '\'' +
-				", address='" + address + '\'' +
-				", createDate=" + createDate +
-				", gender=" + gender +
-				", carList=" + carList +
-				'}';
-	}
 }

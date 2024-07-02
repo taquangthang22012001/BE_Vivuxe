@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,6 +19,18 @@ public class Car {
 	@Column(name = "car_id")
 	private Long carId;
 
+	@Column(name = "owner_name")
+	private String ownerName;
+
+	@Column(name = "owner_email")
+	private String ownerEmail;
+
+	@Column(name = "owner_phone")
+	private String ownerPhone;
+
+	@Column(name = "owner_account_number")
+	private String ownerAccountNumber;
+
 	private String name;
 
 	@Column(name = "license_plate", unique = true, nullable = false)
@@ -26,6 +39,7 @@ public class Car {
 	private double cost = 0.0;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "create_date")
 	private Date createDate;
 
 	private String address;
@@ -83,40 +97,13 @@ public class Car {
 
 	private String description;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false, referencedColumnName = "user_id")
-	private User user;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.ALL)
+	private List<Rental> rentals;
 
-	@Override
-	public String toString() {
-		return "Car{" +
-				"carId=" + carId +
-				", name='" + name + '\'' +
-				", licensePlate='" + licensePlate + '\'' +
-				", cost=" + cost +
-				", createDate=" + createDate +
-				", address='" + address + '\'' +
-				", make='" + make + '\'' +
-				", model='" + model + '\'' +
-				", seat=" + seat +
-				", year=" + year +
-				", transmission=" + transmission +
-				", fuel=" + fuel +
-				", bluetooth=" + bluetooth +
-				", camera360=" + camera360 +
-				", sideCamera=" + sideCamera +
-				", dashCamera=" + dashCamera +
-				", rearCamera=" + rearCamera +
-				", gps=" + gps +
-				", childSeat=" + childSeat +
-				", usb=" + usb +
-				", spareTire=" + spareTire +
-				", dvdScreen=" + dvdScreen +
-				", etc=" + etc +
-				", airbags=" + airbags +
-				", status=" + status +
-				", description='" + description + '\'' +
-				", user=" + user +
-				'}';
+	@PrePersist
+	protected void onCreate(){
+		if(this.createDate == null){
+			this.createDate = new Date();
+		}
 	}
 }

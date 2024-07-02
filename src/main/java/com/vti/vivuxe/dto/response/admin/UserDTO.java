@@ -1,16 +1,15 @@
-package com.vti.vivuxe.dto.request;
+package com.vti.vivuxe.dto.response.admin;
 
 import com.vti.vivuxe.enums.Gender;
+import com.vti.vivuxe.enums.Role;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
-public class UserDto {
+public class UserDTO {
     private Long userId;
     private String username;
-    private String password; // Thêm password nếu cần thiế
     private String email;
     private String phone;
     private Date dob;
@@ -18,5 +17,6 @@ public class UserDto {
     private String address;
     private Date createDate;
     private Gender gender;
-    private List<CarDto> carList;
+    private Role role;
+
 }
