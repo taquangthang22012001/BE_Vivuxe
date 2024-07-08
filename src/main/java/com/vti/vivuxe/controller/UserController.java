@@ -29,8 +29,9 @@ public class UserController {
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<User> createUser(@RequestBody @Valid UserCreationRequest request) {
-		return new ResponseEntity<>(userService.createUser(request), HttpStatus.CREATED);
+	public ResponseEntity<?> createUser(@RequestBody @Valid UserCreationRequest request) {
+		userService.createUser(request);
+		return new ResponseEntity<>("Create User Successfully!", HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")

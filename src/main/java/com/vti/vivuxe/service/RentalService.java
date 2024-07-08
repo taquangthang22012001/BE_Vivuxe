@@ -1,7 +1,7 @@
 package com.vti.vivuxe.service;
 
 import com.vti.vivuxe.dto.request.RentalCreationRequest;
-import com.vti.vivuxe.dto.response.admin.RentalDTO;
+import com.vti.vivuxe.dto.response.RentalDTO;
 import com.vti.vivuxe.entity.Car;
 import com.vti.vivuxe.entity.Rental;
 import com.vti.vivuxe.entity.User;
@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Service
 @NoArgsConstructor
@@ -34,14 +35,9 @@ public class RentalService implements RentalServiceImp {
 	@Autowired
 	private UserRepository userRepository;
 
-	public RentalService(RentalRepository rentalRepository, CarRepository carRepository, UserRepository userRepository) {
-		this.rentalRepository = rentalRepository;
-		this.carRepository = carRepository;
-		this.userRepository = userRepository;
-	}
 
-	public Rental createRental(RentalCreationRequest request) {
-		Rental rental = modelMapper.map(request, Rental.class);
+	public void createRental(RentalCreationRequest request) {
+		Rental rental = request.asRental();
 
 		User user = userRepository.findById(request.getUserUserId())
 				.orElseThrow(() -> new RuntimeException("User not found"));
@@ -53,13 +49,21 @@ public class RentalService implements RentalServiceImp {
 
 		rental.setCar(car);
 
-		return rentalRepository.save(rental);
+		rentalRepository.save(rental);
 	}
 
 	public Page<RentalDTO> getAllRentals(Pageable pageable) {
 		Page<Rental> rentalList = rentalRepository.findAll(pageable);
 
-		Page<RentalDTO> rentalDTOS = rentalList.map(rental -> modelMapper.map(rental, RentalDTO.class));
+		Page<RentalDTO> rentalDTOS = rentalList.map(new Function<Rental, RentalDTO>() {
+			@Override
+			public RentalDTO apply(Rental entity) {
+				RentalDTO dto = new RentalDTO(entity);
+				// Conversion logic
+
+				return dto;
+			}
+		});
 
 		return rentalDTOS;
 	}

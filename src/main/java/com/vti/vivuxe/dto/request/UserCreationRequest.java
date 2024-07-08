@@ -1,11 +1,7 @@
 package com.vti.vivuxe.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.vti.vivuxe.entity.Rental;
 import com.vti.vivuxe.enums.Gender;
 import com.vti.vivuxe.enums.Role;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

@@ -19,17 +19,17 @@ public class Car {
 	@Column(name = "car_id")
 	private Long carId;
 
-	@Column(name = "owner_name")
-	private String ownerName;
-
-	@Column(name = "owner_email")
-	private String ownerEmail;
-
-	@Column(name = "owner_phone")
-	private String ownerPhone;
-
-	@Column(name = "owner_account_number")
-	private String ownerAccountNumber;
+//	@Column(name = "owner_name")
+//	private String ownerName;
+//
+//	@Column(name = "owner_email")
+//	private String ownerEmail;
+//
+//	@Column(name = "owner_phone")
+//	private String ownerPhone;
+//
+//	@Column(name = "owner_account_number")
+//	private String ownerAccountNumber;
 
 	private String name;
 

@@ -1,7 +1,7 @@
 package com.vti.vivuxe.service;
 
 import com.vti.vivuxe.dto.request.UserCreationRequest;
-import com.vti.vivuxe.dto.response.admin.UserDTO;
+import com.vti.vivuxe.dto.response.UserDTO;
 import com.vti.vivuxe.entity.User;
 import com.vti.vivuxe.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Service
 public class UserService implements UserServiceImp {
@@ -21,19 +22,21 @@ public class UserService implements UserServiceImp {
 	@Autowired
 	private UserRepository userRepository;
 
-	public UserService(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
-
 	public Page<UserDTO> getAllUsers(Pageable pageable) {
 		Page<User> users = userRepository.findAll(pageable);
 
-		Page<UserDTO> userDTOS = users.map(user -> modelMapper.map(user, UserDTO.class));
+		Page<UserDTO> userDTOS = users.map(new Function<User, UserDTO>() {
+			@Override
+			public UserDTO apply(User entity) {
+				UserDTO dto = new UserDTO(entity);
+				return dto;
+			}
+		});
 
 		return userDTOS;
 	}
 
-	public User createUser(UserCreationRequest request) {
+	public void createUser(UserCreationRequest request) {
 		Boolean existingUser = userRepository.existsByUsername(request.getUsername());
 
 		if (existingUser) {
@@ -41,7 +44,7 @@ public class UserService implements UserServiceImp {
 		}
 
 		User user = modelMapper.map(request, User.class);
-		return userRepository.save(user);
+		userRepository.save(user);
 	}
 
 	public UserDTO getUserById(Long id) {

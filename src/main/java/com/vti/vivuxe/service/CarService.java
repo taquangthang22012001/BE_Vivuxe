@@ -1,19 +1,18 @@
 package com.vti.vivuxe.service;
 
 import com.vti.vivuxe.dto.request.CarCreationRequest;
-import com.vti.vivuxe.dto.response.admin.CarDTO;
+import com.vti.vivuxe.dto.response.CarDTO;
 import com.vti.vivuxe.entity.Car;
 import com.vti.vivuxe.repository.CarRepository;
-import com.vti.vivuxe.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
+import java.util.function.Function;
 
 @Service
 @NoArgsConstructor
@@ -23,20 +22,19 @@ public class CarService implements CarServiceImp {
 	private ModelMapper modelMapper;
 	@Autowired
 	private CarRepository carRepository;
-	@Autowired
-	private UserRepository userRepository;
 
-    public CarService(CarRepository carRepository, UserRepository userRepository) {
-        this.carRepository = carRepository;
-        this.userRepository = userRepository;
-    }
+	public Page<CarDTO> getAllCars(Pageable pageable) {
 
-    public List<CarDTO> getAllCars() {
+		Page<Car> cars = carRepository.findAll(pageable);
 
-		List<Car> cars = carRepository.findAll();
-		return cars.stream()
-				.map(car -> modelMapper.map(car, CarDTO.class))
-				.collect(Collectors.toList());
+		Page<CarDTO> carDTOS = cars.map(new Function<Car, CarDTO>() {
+			@Override
+			public CarDTO apply(Car entity) {
+				CarDTO dto = new CarDTO(entity);
+				return dto;
+			}
+		});
+		return carDTOS;
 	}
 
 	public CarDTO getCarById(Long id) {
@@ -44,10 +42,9 @@ public class CarService implements CarServiceImp {
 				.map(car -> modelMapper.map(car, CarDTO.class)).orElse(null);
 	}
 
-	public CarDTO createCar(CarCreationRequest carCreationRequest) {
-		var CarCreate = modelMapper.map(carCreationRequest, Car.class);
-		var save = carRepository.save(CarCreate);
-		return modelMapper.map(save, CarDTO.class);
+	public void createCar(CarCreationRequest request) {
+		Car car = modelMapper.map(request, Car.class);
+		carRepository.save(car);
 	}
 
 	public Car updateCar(Long id, Car car) {

@@ -1,6 +1,5 @@
 package com.vti.vivuxe.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vti.vivuxe.enums.Gender;
 import com.vti.vivuxe.enums.Role;
 import jakarta.persistence.*;
@@ -31,8 +30,7 @@ public class User {
 	private String phone;
 
 	@Temporal(TemporalType.DATE)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-	private String dob;
+	private Date dob;
 
 	@Column(name = "driver_license", unique = true)
 	private String driverLicense;

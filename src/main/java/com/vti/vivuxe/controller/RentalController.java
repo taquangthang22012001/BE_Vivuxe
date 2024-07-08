@@ -32,7 +32,8 @@ public class RentalController {
 
 	@PostMapping()
 	public ResponseEntity<?> createRental(@RequestBody RentalCreationRequest request){
-		return ResponseEntity.ok(rentalService.createRental(request));
+		rentalService.createRental(request);
+		return new ResponseEntity<>("Create Rental Successfully!", HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/{id}")

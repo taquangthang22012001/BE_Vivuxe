@@ -10,10 +10,10 @@ import java.util.Date;
 @Data
 public class CarCreationRequest {
     private String name;
-    private String ownerName;
-    private String ownerEmail;
-    private String ownerPhone;
-    private String ownerAccountNumber;
+//    private String ownerName;
+//    private String ownerEmail;
+//    private String ownerPhone;
+//    private String ownerAccountNumber;
     private String licensePlate;
     private double cost;
     private String address;
