@@ -27,5 +27,4 @@ public class RentalDTO {
 		this.userResponse = new UserResponse(rental.getUser());
 		this.carResponse = new CarResponse(rental.getCar());
 	}
-
 }

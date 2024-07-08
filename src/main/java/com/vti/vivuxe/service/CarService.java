@@ -55,11 +55,9 @@ public class CarService implements CarServiceImp {
 		if (optionalCar.isEmpty()) {
 			throw new NoSuchElementException("Car not found with id: " + id);
 		} else {
-			Car existingCar = carRepository.findById(id).get();
+			Car existingCar = optionalCar.get();
 
-			existingCar.setName(request.getName());
-			existingCar.setLicensePlate(request.getLicensePlate());
-			// Update other fields as necessary
+			modelMapper.map(request, existingCar);
 
 			carRepository.save(existingCar);
 		}
