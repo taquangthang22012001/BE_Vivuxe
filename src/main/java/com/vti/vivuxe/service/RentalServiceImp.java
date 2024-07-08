@@ -8,8 +8,12 @@ import org.springframework.data.domain.Pageable;
 
 public interface RentalServiceImp {
 	void createRental(RentalCreationRequest request);
+
 	Page<RentalDTO> getAllRentals(Pageable pageable);
+
 	RentalDTO getRentalById(Long id);
+
 	Rental updateRental(Long id, RentalCreationRequest request);
+
 	void deleteRentalById(Long id);
 }

@@ -54,8 +54,9 @@ public class UserService implements UserServiceImp {
 			throw new RuntimeException("User not found with id: " + id);
 		}
 
-		return userRepository.findById(id)
-				.map(user -> modelMapper.map(user, UserDTO.class)).orElse(null);
+		User existingUser = optionalUser.get();
+
+		return modelMapper.map(existingUser, UserDTO.class);
 	}
 
 	public User updateUser(Long id, UserCreationRequest request) {

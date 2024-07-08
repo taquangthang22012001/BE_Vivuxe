@@ -11,15 +11,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.NoSuchElementException;
-
 @RestController
 @RequestMapping("api/v1/cars")
 public class CarController {
+
 	@Autowired
 	private CarService carService;
 
 	@GetMapping()
+
 	public Page<CarDTO> getAllCars(Pageable pageable) {
 		return carService.getAllCars(pageable);
 	}
@@ -27,7 +27,7 @@ public class CarController {
 	@PostMapping()
 	public ResponseEntity<?> createCar(@RequestBody CarCreationRequest request) {
 		carService.createCar(request);
-		return new ResponseEntity<>("Create Car Successfully!", HttpStatus.CREATED);
+		return new ResponseEntity<>("Car Created Successfully!", HttpStatus.CREATED);
 	}
 
 	@GetMapping("/{id}")
@@ -36,21 +36,14 @@ public class CarController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Car> updateCar(@PathVariable Long id, @RequestBody Car car) {
-		try {
-			return ResponseEntity.ok(carService.updateCar(id, car));
-		} catch (NoSuchElementException e) {
-			return ResponseEntity.notFound().build();
-		}
+	public ResponseEntity<?> updateCar(@PathVariable Long id, @RequestBody CarCreationRequest request) {
+		carService.updateCar(id, request);
+		return ResponseEntity.ok("Car updated Successfully!");
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteCar(@PathVariable Long id) {
-		try {
-			carService.deleteCar(id);
-			return ResponseEntity.noContent().build();
-		} catch (NoSuchElementException e) {
-			return ResponseEntity.notFound().build();
-		}
+	public ResponseEntity<?> deleteCar(@PathVariable Long id) {
+		carService.deleteCar(id);
+		return ResponseEntity.ok("Car deleted Successfully!");
 	}
 }

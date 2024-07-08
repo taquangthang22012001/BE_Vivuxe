@@ -41,6 +41,10 @@ public class CarDTO {
     private String description;
 //    private List<RentalDTO> rentals;
 
+
+    public CarDTO() {
+    }
+
     public CarDTO(Car car) {
         this.carId = car.getCarId();
         this.name = car.getName();

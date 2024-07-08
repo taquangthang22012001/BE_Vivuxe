@@ -33,12 +33,12 @@ public class RentalController {
 	@PostMapping()
 	public ResponseEntity<?> createRental(@RequestBody RentalCreationRequest request){
 		rentalService.createRental(request);
-		return new ResponseEntity<>("Create Rental Successfully!", HttpStatus.CREATED);
+		return new ResponseEntity<>("Rental Created Successfully!", HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteRental(@PathVariable Long id){
 		rentalService.deleteRentalById(id);
-		return new ResponseEntity<>("Delete Rental Successfully with id: " + id, HttpStatus.OK);
+		return new ResponseEntity<>("Rental Deleted Successfully!", HttpStatus.OK);
 	}
 }

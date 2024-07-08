@@ -4,10 +4,10 @@ import com.vti.vivuxe.entity.User;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
+
 
 @Data
-public class UserDTO {
+public class UserResponse {
 	private Long userId;
 	private String username;
 	private String email;
@@ -18,14 +18,11 @@ public class UserDTO {
 	private Date createDate;
 	private String gender;
 	private String role;
-//	private List<RentalDTO> rentals;
 
-
-	public UserDTO() {
+	public UserResponse() {
 	}
 
-	//    Tạo constructor để xuất ra giá trị
-	public UserDTO(User user) {
+	public UserResponse(User user) {
 		this.userId = user.getUserId();
 		this.username = user.getUsername();
 		this.email = user.getEmail();
@@ -36,13 +33,5 @@ public class UserDTO {
 		this.createDate = user.getCreateDate();
 		this.gender = user.getGender().name();
 		this.role = user.getRole().name();
-
-////        Tạo 1 list rental DTOS rỗng
-//		List<RentalDTO> rentalDTOS = new ArrayList<>();
-////        Lấy từng rental trong list Rentals
-//		for (Rental rental : user.getRentals()) {
-//			rentalDTOS.add(new RentalDTO(rental));
-//		}
-//		this.rentals = rentalDTOS;
 	}
 }

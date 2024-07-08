@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -39,7 +40,8 @@ public class CarService implements CarServiceImp {
 
 	public CarDTO getCarById(Long id) {
 		return carRepository.findById(id)
-				.map(car -> modelMapper.map(car, CarDTO.class)).orElse(null);
+				.map(car -> modelMapper.map(car, CarDTO.class))
+				.orElseThrow(() -> new RuntimeException("Car not found with id:" + id));
 	}
 
 	public void createCar(CarCreationRequest request) {
@@ -47,17 +49,19 @@ public class CarService implements CarServiceImp {
 		carRepository.save(car);
 	}
 
-	public Car updateCar(Long id, Car car) {
-		if (!carRepository.existsById(id)) {
+	public void updateCar(Long id, CarCreationRequest request) {
+		Optional<Car> optionalCar = carRepository.findById(id);
+
+		if (optionalCar.isEmpty()) {
 			throw new NoSuchElementException("Car not found with id: " + id);
 		} else {
 			Car existingCar = carRepository.findById(id).get();
 
-			existingCar.setName(car.getName());
-			existingCar.setLicensePlate(car.getLicensePlate());
+			existingCar.setName(request.getName());
+			existingCar.setLicensePlate(request.getLicensePlate());
 			// Update other fields as necessary
 
-			return carRepository.save(existingCar);
+			carRepository.save(existingCar);
 		}
 	}
 

@@ -1,6 +1,5 @@
 package com.vti.vivuxe.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vti.vivuxe.enums.Status;
 import jakarta.persistence.*;
 import lombok.Data;

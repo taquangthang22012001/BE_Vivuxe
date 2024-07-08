@@ -31,11 +31,11 @@ public class UserController {
 	@PostMapping("/signup")
 	public ResponseEntity<?> createUser(@RequestBody @Valid UserCreationRequest request) {
 		userService.createUser(request);
-		return new ResponseEntity<>("Create User Successfully!", HttpStatus.CREATED);
+		return new ResponseEntity<>("User Created Successfully!", HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody @Valid UserCreationRequest request) {
+	public ResponseEntity<?> updateUser(@PathVariable long id, @RequestBody @Valid UserCreationRequest request) {
 		return new ResponseEntity<>(userService.updateUser(id, request), HttpStatus.OK);
 	}
 
