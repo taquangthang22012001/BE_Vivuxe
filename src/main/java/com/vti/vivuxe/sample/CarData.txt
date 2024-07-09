@@ -13,7 +13,7 @@
         "seat": 5,
         "year": 2020,
         "transmission": "AUTOMATIC",
-        "fuel": "Gasoline",
+        "fuel": "GAS",
         "bluetooth": true,
         "camera360": true,
         "sideCamera": false,

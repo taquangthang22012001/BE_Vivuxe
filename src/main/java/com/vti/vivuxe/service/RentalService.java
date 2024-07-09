@@ -39,7 +39,7 @@ public class RentalService implements RentalServiceImp {
 
 
 	public void createRental(RentalCreationRequest request) {
-		// Validate that request IDs are not null
+		// Validate that request IDs from form are not null
 		if (request.getUserId() == null) {
 			throw new IllegalArgumentException("User ID must not be null");
 		}
@@ -50,6 +50,7 @@ public class RentalService implements RentalServiceImp {
 
 		Rental rental = request.asRental();
 
+//		validate that objects from database are not found
 		User user = userRepository.findById(request.getUserId())
 				.orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -105,7 +106,7 @@ public class RentalService implements RentalServiceImp {
 			userResponse.setGender(user.getGender().name());
 			userResponse.setPhone(user.getPhone());
 			userResponse.setRole(user.getRole().name());
-			// Map other fields if needed
+			// save User to rentalDTO
 			rentalDTO.setUserResponse(userResponse);
 		}
 
@@ -150,17 +151,33 @@ public class RentalService implements RentalServiceImp {
 
 
 	public Rental updateRental(Long id, RentalCreationRequest request) {
+		if(request.getUserId() == null){
+			throw new IllegalArgumentException("UserId must not be null");
+		}
+
+		if(request.getCarId() == null){
+			throw new IllegalArgumentException("CarId must not be null");
+		}
+
 		Optional<Rental> optionalRental = rentalRepository.findById(id);
 
 		if (optionalRental.isEmpty()) {
 			throw new RuntimeException("Rental not found with id: " + id);
 		}
 
-		Rental existingRental = optionalRental.get();
+		User user = userRepository.findById(request.getUserId())
+				.orElseThrow(() -> new RuntimeException("User not found"));
 
-		modelMapper.map(request, existingRental);
+		Car car = carRepository.findById(request.getCarId())
+				.orElseThrow(() -> new RuntimeException("Car not found"));
 
-		return rentalRepository.save(existingRental);
+		Rental updatedRental = optionalRental.get();
+
+		updatedRental.setUser(user);
+
+		updatedRental.setCar(car);
+
+		return rentalRepository.save(updatedRental);
 	}
 
 

@@ -14,7 +14,6 @@ public class RentalDTO {
 	private UserResponse userResponse;
 	private CarResponse carResponse;
 
-
 	public RentalDTO() {
 	}
 
