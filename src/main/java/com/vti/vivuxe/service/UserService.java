@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -15,7 +17,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Service
-public class UserService implements UserServiceImp {
+public class UserService {
 	@Autowired
 	private ModelMapper modelMapper;
 
@@ -78,4 +80,11 @@ public class UserService implements UserServiceImp {
 
 		userRepository.delete(user);
 	}
+
+//	@Override
+//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//
+//
+//		return null;
+//	}
 }

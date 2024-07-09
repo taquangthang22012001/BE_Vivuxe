@@ -3,12 +3,12 @@ package com.vti.vivuxe.service;
 import com.vti.vivuxe.dto.request.UserCreationRequest;
 import com.vti.vivuxe.dto.response.UserDTO;
 import com.vti.vivuxe.entity.User;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
+//import org.springframework.security.core.userdetails.UserDetailsService;
 
 
-@Service
 public interface UserServiceImp {
 	Page<UserDTO> getAllUsers(Pageable pageable);
 	UserDTO getUserById(Long id);

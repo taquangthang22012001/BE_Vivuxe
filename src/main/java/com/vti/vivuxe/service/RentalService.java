@@ -1,5 +1,6 @@
 package com.vti.vivuxe.service;
 
+import com.sun.jdi.request.DuplicateRequestException;
 import com.vti.vivuxe.dto.request.RentalCreationRequest;
 import com.vti.vivuxe.dto.response.CarResponse;
 import com.vti.vivuxe.dto.response.RentalDTO;
@@ -150,7 +151,7 @@ public class RentalService implements RentalServiceImp {
 	}
 
 
-	public Rental updateRental(Long id, RentalCreationRequest request) {
+	public void updateRental(Long id, RentalCreationRequest request) {
 		if(request.getUserId() == null){
 			throw new IllegalArgumentException("UserId must not be null");
 		}
@@ -165,19 +166,19 @@ public class RentalService implements RentalServiceImp {
 			throw new RuntimeException("Rental not found with id: " + id);
 		}
 
+		Rental updatedRental = optionalRental.get();
+
 		User user = userRepository.findById(request.getUserId())
 				.orElseThrow(() -> new RuntimeException("User not found"));
 
 		Car car = carRepository.findById(request.getCarId())
 				.orElseThrow(() -> new RuntimeException("Car not found"));
 
-		Rental updatedRental = optionalRental.get();
-
 		updatedRental.setUser(user);
 
 		updatedRental.setCar(car);
 
-		return rentalRepository.save(updatedRental);
+		rentalRepository.save(updatedRental);
 	}
 
 

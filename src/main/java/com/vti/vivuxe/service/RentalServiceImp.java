@@ -13,7 +13,7 @@ public interface RentalServiceImp {
 
 	RentalDTO getRentalById(Long id);
 
-	Rental updateRental(Long id, RentalCreationRequest request);
+	void updateRental(Long id, RentalCreationRequest request);
 
 	void deleteRentalById(Long id);
 }

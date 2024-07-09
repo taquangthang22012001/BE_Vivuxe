@@ -28,7 +28,7 @@ public class UserController {
 		return ResponseEntity.ok(userService.getUserById(id));
 	}
 
-	@PostMapping("/signup")
+	@PostMapping()
 	public ResponseEntity<?> createUser(@RequestBody @Valid UserCreationRequest request) {
 		userService.createUser(request);
 		return new ResponseEntity<>("User Created Successfully!", HttpStatus.CREATED);

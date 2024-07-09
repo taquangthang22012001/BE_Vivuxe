@@ -27,7 +27,8 @@ public class RentalController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<?> updateRental(@PathVariable Long id, @RequestBody RentalCreationRequest request){
-		return ResponseEntity.ok(rentalService.updateRental(id, request));
+		rentalService.updateRental(id, request);
+		return ResponseEntity.ok("Update Successfully!");
 	}
 
 	@PostMapping()

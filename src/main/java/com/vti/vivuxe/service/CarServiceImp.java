@@ -2,7 +2,6 @@ package com.vti.vivuxe.service;
 
 import com.vti.vivuxe.dto.request.CarCreationRequest;
 import com.vti.vivuxe.dto.response.CarDTO;
-import com.vti.vivuxe.entity.Car;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
