@@ -35,7 +35,7 @@ public class UserCreationRequest {
 
 	private String address;
 
-	private Gender gender;
+	private String gender;
 
-	private Role role;
+	private String role;
 }

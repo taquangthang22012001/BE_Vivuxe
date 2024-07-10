@@ -21,8 +21,8 @@ public class CarCreationRequest {
     private String model;
     private int seat;
     private int year;
-    private Transmission transmission;
-    private Fuel fuel;
+    private String transmission;
+    private String fuel;
     private Boolean bluetooth;
     private Boolean camera360;
     private Boolean sideCamera;
@@ -35,6 +35,8 @@ public class CarCreationRequest {
     private Boolean dvdScreen;
     private Boolean etc;
     private Boolean airbags;
-    private Status status;
+    private String status;
     private String description;
 }
+
+

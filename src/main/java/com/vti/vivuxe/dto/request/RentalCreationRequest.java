@@ -12,13 +12,13 @@ public class RentalCreationRequest {
     private Long carId;
     private Date rentalDate;
     private Date rentalReturn;
-    private Status status;
+    private String status;
 
     public Rental asRental() {
         Rental rental = new Rental();
         rental.setRentalDate(this.rentalDate);
         rental.setRentalReturn(this.rentalReturn);
-        rental.setStatus(this.status);
+        rental.setStatus(Status.valueOf(this.status));
         return rental;
     }
 }

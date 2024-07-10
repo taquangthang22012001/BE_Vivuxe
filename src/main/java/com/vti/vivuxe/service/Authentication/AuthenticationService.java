@@ -4,6 +4,7 @@ import com.vti.vivuxe.dto.request.SigninRequest;
 import com.vti.vivuxe.dto.request.UserCreationRequest;
 import com.vti.vivuxe.dto.response.JWTAuthenticationResponse;
 import com.vti.vivuxe.entity.User;
+import com.vti.vivuxe.enums.Gender;
 import com.vti.vivuxe.enums.Role;
 import com.vti.vivuxe.repository.UserRepository;
 import com.vti.vivuxe.service.JWT.JWTService;
@@ -39,7 +40,7 @@ public class AuthenticationService implements IAuthenticationService {
 		user.setEmail(signupRequest.getEmail());
 		user.setDriverLicense(signupRequest.getDriverLicense());
 		user.setAddress(signupRequest.getAddress());
-		user.setGender(signupRequest.getGender());
+		user.setGender(Gender.valueOf(signupRequest.getGender()));
 		user.setDob(signupRequest.getDob());
 		user.setPhone(signupRequest.getPhone());
 		user.setRole(Role.USER);
