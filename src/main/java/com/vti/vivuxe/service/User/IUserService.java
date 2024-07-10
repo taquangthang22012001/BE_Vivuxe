@@ -1,18 +1,18 @@
-package com.vti.vivuxe.service;
+package com.vti.vivuxe.service.User;
 
 import com.vti.vivuxe.dto.request.UserCreationRequest;
 import com.vti.vivuxe.dto.response.UserDTO;
 import com.vti.vivuxe.entity.User;
-import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-//import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 
-public interface UserServiceImp {
+public interface IUserService {
 	Page<UserDTO> getAllUsers(Pageable pageable);
 	UserDTO getUserById(Long id);
 	void createUser(UserCreationRequest request);
 	User updateUser(Long id, UserCreationRequest request);
 	void deleteUser(Long id);
+	UserDetailsService userDetailsService();
 }

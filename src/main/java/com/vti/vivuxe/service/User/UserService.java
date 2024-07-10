@@ -1,15 +1,18 @@
-package com.vti.vivuxe.service;
+package com.vti.vivuxe.service.User;
 
 import com.vti.vivuxe.dto.request.UserCreationRequest;
 import com.vti.vivuxe.dto.response.UserDTO;
 import com.vti.vivuxe.entity.User;
 import com.vti.vivuxe.repository.UserRepository;
+import com.vti.vivuxe.service.User.IUserService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-//import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -17,12 +20,16 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Service
-public class UserService {
+@RequiredArgsConstructor
+public class UserService implements IUserService {
 	@Autowired
 	private ModelMapper modelMapper;
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private CustomUserDetailsService customUserDetailsService;
 
 	public Page<UserDTO> getAllUsers(Pageable pageable) {
 		Page<User> users = userRepository.findAll(pageable);
@@ -81,10 +88,10 @@ public class UserService {
 		userRepository.delete(user);
 	}
 
-//	@Override
-//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//
-//
-//		return null;
-//	}
+	@Override
+	public UserDetailsService userDetailsService() {
+		return customUserDetailsService;
+	}
+
+
 }

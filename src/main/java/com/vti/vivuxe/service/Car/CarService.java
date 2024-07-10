@@ -1,4 +1,4 @@
-package com.vti.vivuxe.service;
+package com.vti.vivuxe.service.Car;
 
 import com.vti.vivuxe.dto.request.CarCreationRequest;
 import com.vti.vivuxe.dto.response.CarDTO;
@@ -18,7 +18,7 @@ import java.util.function.Function;
 @Service
 @NoArgsConstructor
 
-public class CarService implements CarServiceImp {
+public class CarService implements ICarService {
 	@Autowired
 	private ModelMapper modelMapper;
 	@Autowired

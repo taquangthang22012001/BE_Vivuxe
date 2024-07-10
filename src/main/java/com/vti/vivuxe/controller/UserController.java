@@ -1,8 +1,7 @@
 package com.vti.vivuxe.controller;
 
 import com.vti.vivuxe.dto.request.UserCreationRequest;
-import com.vti.vivuxe.entity.User;
-import com.vti.vivuxe.service.UserService;
+import com.vti.vivuxe.service.User.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;

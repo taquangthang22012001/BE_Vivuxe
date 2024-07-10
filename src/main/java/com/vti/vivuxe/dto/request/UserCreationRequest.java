@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.Date;
+
 
 @Data
 public class UserCreationRequest {
@@ -25,7 +27,7 @@ public class UserCreationRequest {
 	@Size(min = 10, max = 11, message = "Phone number must be between 10 and 20 numbers")
 	private String phone;
 
-	private String dob;
+	private Date dob;
 
 	@NotNull(message = "Driver License cannot be null")
 	@Size(min = 5, max = 15, message = "Driver License must be between 5 and 15 characters")

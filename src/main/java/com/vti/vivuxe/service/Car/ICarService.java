@@ -1,11 +1,11 @@
-package com.vti.vivuxe.service;
+package com.vti.vivuxe.service.Car;
 
 import com.vti.vivuxe.dto.request.CarCreationRequest;
 import com.vti.vivuxe.dto.response.CarDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface CarServiceImp {
+public interface ICarService {
 	Page<CarDTO> getAllCars(Pageable pageable);
 
 	void createCar(CarCreationRequest carCreationRequest);

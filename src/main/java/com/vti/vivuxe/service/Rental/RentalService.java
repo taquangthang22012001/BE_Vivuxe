@@ -1,6 +1,5 @@
-package com.vti.vivuxe.service;
+package com.vti.vivuxe.service.Rental;
 
-import com.sun.jdi.request.DuplicateRequestException;
 import com.vti.vivuxe.dto.request.RentalCreationRequest;
 import com.vti.vivuxe.dto.response.CarResponse;
 import com.vti.vivuxe.dto.response.RentalDTO;
@@ -11,6 +10,7 @@ import com.vti.vivuxe.entity.User;
 import com.vti.vivuxe.repository.CarRepository;
 import com.vti.vivuxe.repository.RentalRepository;
 import com.vti.vivuxe.repository.UserRepository;
+import com.vti.vivuxe.service.Rental.IRentalService;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import java.util.function.Function;
 
 @Service
 @NoArgsConstructor
-public class RentalService implements RentalServiceImp {
+public class RentalService implements IRentalService {
 	@Autowired
 	private ModelMapper modelMapper;
 
