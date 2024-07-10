@@ -68,7 +68,7 @@ public class User implements UserDetails {
 		}
 
 		if(this.gender == null){
-			this.gender = Gender.UNKNOWN;
+			this.gender = Gender.Unknown;
 		}
 	}
 

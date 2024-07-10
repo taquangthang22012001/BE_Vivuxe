@@ -52,7 +52,7 @@ public class CarDTO {
         this.cost = car.getCost();
         this.createDate = car.getCreateDate();
         this.address = car.getAddress();
-        this.make = car.getMake();
+        this.make = car.getMake().name();
         this.model = car.getModel();
         this.seat = car.getSeat();
         this.year = car.getYear();

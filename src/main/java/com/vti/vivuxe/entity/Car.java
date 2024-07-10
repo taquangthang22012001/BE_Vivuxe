@@ -1,6 +1,7 @@
 package com.vti.vivuxe.entity;
 
 import com.vti.vivuxe.enums.Fuel;
+import com.vti.vivuxe.enums.Make;
 import com.vti.vivuxe.enums.Status;
 import com.vti.vivuxe.enums.Transmission;
 import jakarta.persistence.*;
@@ -19,18 +20,6 @@ public class Car {
 	@Column(name = "car_id")
 	private Long carId;
 
-//	@Column(name = "owner_name")
-//	private String ownerName;
-//
-//	@Column(name = "owner_email")
-//	private String ownerEmail;
-//
-//	@Column(name = "owner_phone")
-//	private String ownerPhone;
-//
-//	@Column(name = "owner_account_number")
-//	private String ownerAccountNumber;
-
 	private String name;
 
 	@Column(name = "license_plate", unique = true, nullable = false)
@@ -44,7 +33,7 @@ public class Car {
 
 	private String address;
 
-	private String make;
+	private Make make;
 
 	private String model;
 

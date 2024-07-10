@@ -40,14 +40,17 @@ public class CarResponse {
 	public CarResponse(Car car) {
 		this.carId = car.getCarId();
 		this.name = car.getName();
-		this.make = car.getMake();
+		this.make = car.getMake().name();
 		this.model = car.getModel();
 		this.seat = car.getSeat();
 		this.year = car.getYear();
+		this.address = car.getAddress();
 		this.transmission = car.getTransmission().name();
+		this.licensePlate = car.getLicensePlate();
 		this.fuel = car.getFuel().name();
 		this.bluetooth = car.getBluetooth();
 		this.camera360 = car.getCamera360();
+		this.cost = car.getCost();
 		this.sideCamera = car.getSideCamera();
 		this.dashCamera = car.getDashCamera();
 		this.rearCamera = car.getRearCamera();

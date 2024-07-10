@@ -134,7 +134,7 @@ public class RentalService implements IRentalService {
 			carResponse.setGps(car.getGps());
 			carResponse.setYear(car.getYear());
 			carResponse.setModel(car.getModel());
-			carResponse.setMake(car.getMake());
+			carResponse.setMake(car.getMake().name());
 			carResponse.setTransmission(car.getTransmission().name());
 			carResponse.setSideCamera(car.getSideCamera());
 			carResponse.setUsb(car.getUsb());
@@ -162,6 +162,7 @@ public class RentalService implements IRentalService {
 
 		Optional<Rental> optionalRental = rentalRepository.findById(id);
 
+
 		if (optionalRental.isEmpty()) {
 			throw new RuntimeException("Rental not found with id: " + id);
 		}
@@ -173,6 +174,10 @@ public class RentalService implements IRentalService {
 
 		Car car = carRepository.findById(request.getCarId())
 				.orElseThrow(() -> new RuntimeException("Car not found"));
+
+		if(request.getUserId() == updatedRental.getUser().getUserId() || request.getCarId() == updatedRental.getCar().getCarId() ){
+			throw new IllegalArgumentException("User or Car already existed!");
+		}
 
 		updatedRental.setUser(user);
 
