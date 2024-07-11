@@ -10,15 +10,16 @@ import com.vti.vivuxe.entity.User;
 import com.vti.vivuxe.repository.CarRepository;
 import com.vti.vivuxe.repository.RentalRepository;
 import com.vti.vivuxe.repository.UserRepository;
-import com.vti.vivuxe.service.Rental.IRentalService;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -41,9 +42,7 @@ public class RentalService implements IRentalService {
 
 	public void createRental(RentalCreationRequest request) {
 		// Validate that request IDs from form are not null
-		if (request.getUserId() == null) {
-			throw new IllegalArgumentException("User ID must not be null");
-		}
+
 
 		if (request.getCarId() == null) {
 			throw new IllegalArgumentException("Car ID must not be null");
@@ -52,7 +51,10 @@ public class RentalService implements IRentalService {
 		Rental rental = request.asRental();
 
 //		validate that objects from database are not found
-		User user = userRepository.findById(request.getUserId())
+		User u = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (Objects.isNull(u))
+			new RuntimeException("User not found");
+		User user = userRepository.findById(u.getUserId())// nguoi dang nhap
 				.orElseThrow(() -> new RuntimeException("User not found"));
 
 		Car car = carRepository.findById(request.getCarId())
@@ -152,9 +154,7 @@ public class RentalService implements IRentalService {
 
 
 	public void updateRental(Long id, RentalCreationRequest request) {
-		if(request.getUserId() == null){
-			throw new IllegalArgumentException("UserId must not be null");
-		}
+
 
 		if(request.getCarId() == null){
 			throw new IllegalArgumentException("CarId must not be null");
@@ -168,14 +168,17 @@ public class RentalService implements IRentalService {
 		}
 
 		Rental updatedRental = optionalRental.get();
+		User u = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (Objects.isNull(u))
+			new RuntimeException("User not found");
 
-		User user = userRepository.findById(request.getUserId())
+		User user = userRepository.findById(u.getUserId())
 				.orElseThrow(() -> new RuntimeException("User not found"));
 
 		Car car = carRepository.findById(request.getCarId())
 				.orElseThrow(() -> new RuntimeException("Car not found"));
 
-		if(request.getUserId() == updatedRental.getUser().getUserId() || request.getCarId() == updatedRental.getCar().getCarId() ){
+		if(u.getUserId() == updatedRental.getUser().getUserId() || request.getCarId() == updatedRental.getCar().getCarId() ){
 			throw new IllegalArgumentException("User or Car already existed!");
 		}
 

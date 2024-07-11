@@ -61,6 +61,9 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 			}
 		}
 
+//		User u = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		u.getUserId();v
+
 		filterChain.doFilter(request, response);
 	}
 }
