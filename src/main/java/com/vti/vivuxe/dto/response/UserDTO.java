@@ -1,8 +1,10 @@
 package com.vti.vivuxe.dto.response;
 
+import com.vti.vivuxe.entity.Car;
 import com.vti.vivuxe.entity.User;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class UserDTO {
 	private String gender;
 	private String role;
 //	private List<RentalDTO> rentals;
+	private List<CarDTO> cars;
 
 
 	public UserDTO() {
@@ -44,5 +47,12 @@ public class UserDTO {
 //			rentalDTOS.add(new RentalDTO(rental));
 //		}
 //		this.rentals = rentalDTOS;
+
+
+		List<CarDTO> carDTOS = new ArrayList<>();
+		for(Car car : user.getCars()){
+			carDTOS.add(new CarDTO(car));
+		}
+		this.cars = carDTOS;
 	}
 }

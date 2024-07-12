@@ -3,10 +3,8 @@ package com.vti.vivuxe.entity;
 import com.vti.vivuxe.enums.Gender;
 import com.vti.vivuxe.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -56,6 +54,9 @@ public class User implements UserDetails {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Rental> rentals;
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Car> cars;
+
 
 	@PrePersist
 	protected void onCreate() {
@@ -63,11 +64,11 @@ public class User implements UserDetails {
 			this.createDate = new Date();
 		}
 
-		if (this.role == null){
+		if (this.role == null) {
 			this.role = Role.USER;
 		}
 
-		if(this.gender == null){
+		if (this.gender == null) {
 			this.gender = Gender.Unknown;
 		}
 	}

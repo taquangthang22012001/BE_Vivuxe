@@ -10,10 +10,6 @@ import java.util.List;
 @Data
 public class CarDTO {
     private Long carId;
-//    private String ownerName;
-//    private String ownerEmail;
-//    private String ownerPhone;
-//    private String ownerAccountNumber;
     private String name;
     private String licensePlate;
     private double cost;
@@ -39,6 +35,7 @@ public class CarDTO {
     private Boolean airbags;
     private String status;
     private String description;
+//    private UserResponse userResponse;
 //    private List<RentalDTO> rentals;
 
 
@@ -72,8 +69,9 @@ public class CarDTO {
         this.airbags = car.getAirbags();
         this.status = car.getStatus().name();
         this.description = car.getDescription();
+//        this.userResponse = new UserResponse(car.getUser());
 
-        List<RentalDTO> rentalDTOS = new ArrayList<>();
+//        List<RentalDTO> rentalDTOS = new ArrayList<>();
 
 //        for(Rental rental : car.getRentals()){
 //            rentalDTOS.add(new RentalDTO(rental));

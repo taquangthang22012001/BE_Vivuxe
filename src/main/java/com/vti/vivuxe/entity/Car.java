@@ -89,9 +89,13 @@ public class Car {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.ALL)
 	private List<Rental> rentals;
 
+	@ManyToOne()
+	@JoinColumn(name = "user_id", nullable = false, referencedColumnName = "user_id")
+	private User user;
+
 	@PrePersist
-	protected void onCreate(){
-		if(this.createDate == null){
+	protected void onCreate() {
+		if (this.createDate == null) {
 			this.createDate = new Date();
 		}
 	}
