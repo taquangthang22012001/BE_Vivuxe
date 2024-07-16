@@ -18,6 +18,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
@@ -60,6 +64,13 @@ public class RentalService implements IRentalService {
 		Car car = carRepository.findById(request.getCarId())
 				.orElseThrow(() -> new RuntimeException("Car not found"));
 
+		LocalDate rentalDate = Instant.ofEpochMilli(request.getRentalDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate rentalReturn = Instant.ofEpochMilli(request.getRentalReturn().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+		long numberOfDays = ChronoUnit.DAYS.between(rentalDate, rentalReturn);
+
+		var rentalCost = numberOfDays * car.getCost();
+
+		rental.setRentalCost(rentalCost);
 		rental.setUser(user);
 		rental.setCar(car);
 
@@ -118,8 +129,7 @@ public class RentalService implements IRentalService {
 		if (car != null) {
 			CarResponse carResponse = new CarResponse();
 			carResponse.setCarId(car.getCarId());
-			carResponse.setAddress(car.getName());
-			carResponse.setName(car.getName());
+			carResponse.setAddress(car.getAddress());
 			carResponse.setBluetooth(car.getBluetooth());
 			carResponse.setCamera360(car.getCamera360());
 			carResponse.setAirbags(car.getAirbags());

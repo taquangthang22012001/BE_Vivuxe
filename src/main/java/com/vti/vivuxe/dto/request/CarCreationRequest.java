@@ -5,12 +5,12 @@ import com.vti.vivuxe.entity.User;
 import com.vti.vivuxe.enums.Fuel;
 import com.vti.vivuxe.enums.Status;
 import com.vti.vivuxe.enums.Transmission;
+import jakarta.persistence.Column;
 import lombok.Data;
 
 import java.util.Date;
 @Data
 public class CarCreationRequest {
-    private String name;
     private String licensePlate;
     private double cost;
     private String address;
@@ -21,6 +21,15 @@ public class CarCreationRequest {
     private String transmission;
     private String fuel;
     private Boolean bluetooth;
+    private Boolean map;
+    //	cảm biến lốp
+    private Boolean tireSensor;
+    //	cảm biến va chạm
+    private Boolean collisionSensor;
+    //	cảnh báo tốc độ
+    private Boolean speedWarning;
+    //	nắp thùng bán tải
+    private Boolean truckCover;
     private Boolean camera360;
     private Boolean sideCamera;
     private Boolean dashCamera;

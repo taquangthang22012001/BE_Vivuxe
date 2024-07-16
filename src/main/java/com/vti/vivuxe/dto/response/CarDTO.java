@@ -10,7 +10,6 @@ import java.util.List;
 @Data
 public class CarDTO {
     private Long carId;
-    private String name;
     private String licensePlate;
     private double cost;
     private Date createDate;
@@ -22,6 +21,15 @@ public class CarDTO {
     private String transmission;
     private String fuel;
     private Boolean bluetooth;
+    private Boolean map;
+    //	cảm biến lốp
+    private Boolean tireSensor;
+    //	cảm biến va chạm
+    private Boolean collisionSensor;
+    //	cảnh báo tốc độ
+    private Boolean speedWarning;
+    //	nắp thùng bán tải
+    private Boolean truckCover;
     private Boolean camera360;
     private Boolean sideCamera;
     private Boolean dashCamera;
@@ -44,7 +52,6 @@ public class CarDTO {
 
     public CarDTO(Car car) {
         this.carId = car.getCarId();
-        this.name = car.getName();
         this.licensePlate = car.getLicensePlate();
         this.cost = car.getCost();
         this.createDate = car.getCreateDate();
@@ -56,6 +63,11 @@ public class CarDTO {
         this.transmission = car.getTransmission().name();
         this.fuel = car.getFuel().name();
         this.bluetooth = car.getBluetooth();
+        this.map = car.getMap();
+        this.tireSensor = car.getTireSensor();
+        this.collisionSensor = car.getCollisionSensor();
+        this.speedWarning = car.getSpeedWarning();
+        this.truckCover = car.getTruckCover();
         this.camera360 = car.getCamera360();
         this.sideCamera = car.getSideCamera();
         this.dashCamera = car.getDashCamera();

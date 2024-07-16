@@ -8,7 +8,6 @@ import java.util.Date;
 @Data
 public class CarResponse {
 	private Long carId;
-	private String name;
 	private String licensePlate;
 	private double cost;
 	private Date createDate;
@@ -20,6 +19,15 @@ public class CarResponse {
 	private String transmission;
 	private String fuel;
 	private Boolean bluetooth;
+	private Boolean map;
+	//	cảm biến lốp
+	private Boolean tireSensor;
+	//	cảm biến va chạm
+	private Boolean collisionSensor;
+	//	cảnh báo tốc độ
+	private Boolean speedWarning;
+	//	nắp thùng bán tải
+	private Boolean truckCover;
 	private Boolean camera360;
 	private Boolean sideCamera;
 	private Boolean dashCamera;
@@ -39,7 +47,6 @@ public class CarResponse {
 
 	public CarResponse(Car car) {
 		this.carId = car.getCarId();
-		this.name = car.getName();
 		this.make = car.getMake().name();
 		this.model = car.getModel();
 		this.seat = car.getSeat();
@@ -49,6 +56,11 @@ public class CarResponse {
 		this.licensePlate = car.getLicensePlate();
 		this.fuel = car.getFuel().name();
 		this.bluetooth = car.getBluetooth();
+		this.map = car.getMap();
+		this.tireSensor = car.getTireSensor();
+		this.collisionSensor = car.getCollisionSensor();
+		this.speedWarning = car.getSpeedWarning();
+		this.truckCover = car.getTruckCover();
 		this.camera360 = car.getCamera360();
 		this.cost = car.getCost();
 		this.sideCamera = car.getSideCamera();

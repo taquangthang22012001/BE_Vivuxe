@@ -23,6 +23,9 @@ public class Rental {
 	@Temporal(TemporalType.DATE)
 	private Date rentalReturn;
 
+	@Column(name = "rental_cost")
+	private double rentalCost;
+
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private Status status;

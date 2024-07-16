@@ -1,6 +1,7 @@
 package com.vti.vivuxe.controller;
 
 import com.vti.vivuxe.dto.request.SigninRequest;
+import com.vti.vivuxe.dto.request.SignupRequest;
 import com.vti.vivuxe.dto.request.UserCreationRequest;
 import com.vti.vivuxe.dto.response.JWTAuthenticationResponse;
 import com.vti.vivuxe.entity.User;
@@ -19,7 +20,7 @@ public class AuthenticationController {
 	private AuthenticationService authenticationService;
 
 	@PostMapping("/signup")
-	public ResponseEntity<User> signup(@RequestBody UserCreationRequest request){
+	public ResponseEntity<User> signup(@RequestBody SignupRequest request){
 		return ResponseEntity.ok(authenticationService.signup(request));
 	}
 

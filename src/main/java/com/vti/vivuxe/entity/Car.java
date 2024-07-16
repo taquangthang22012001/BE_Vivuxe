@@ -20,8 +20,6 @@ public class Car {
 	@Column(name = "car_id")
 	private Long carId;
 
-	private String name;
-
 	@Column(name = "license_plate", unique = true, nullable = false)
 	private String licensePlate;
 
@@ -50,6 +48,20 @@ public class Car {
 	private Fuel fuel;
 
 	private Boolean bluetooth;
+	//	Bản đồ
+	private Boolean map;
+	//	cảm biến lốp
+	@Column(name = "tire_sensor")
+	private Boolean tireSensor;
+	//	cảm biến va chạm
+	@Column(name = "collision_sensor")
+	private Boolean collisionSensor;
+	//	cảnh báo tốc độ
+	@Column(name = "speed_warning")
+	private Boolean speedWarning;
+	//	nắp thùng bán tải
+	@Column(name = "truck_cover")
+	private Boolean truckCover;
 
 	@Column(name = "camera_360")
 	private Boolean camera360;
@@ -97,6 +109,9 @@ public class Car {
 	protected void onCreate() {
 		if (this.createDate == null) {
 			this.createDate = new Date();
+		}
+		if (this.status == null) {
+			this.status = Status.Available;
 		}
 	}
 }

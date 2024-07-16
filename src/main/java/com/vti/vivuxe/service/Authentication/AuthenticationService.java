@@ -1,6 +1,7 @@
 package com.vti.vivuxe.service.Authentication;
 
 import com.vti.vivuxe.dto.request.SigninRequest;
+import com.vti.vivuxe.dto.request.SignupRequest;
 import com.vti.vivuxe.dto.request.UserCreationRequest;
 import com.vti.vivuxe.dto.response.JWTAuthenticationResponse;
 import com.vti.vivuxe.entity.User;
@@ -33,15 +34,11 @@ public class AuthenticationService implements IAuthenticationService {
 	@Autowired
 	private JWTService jwtService;
 
-	public User signup(UserCreationRequest signupRequest){
+	public User signup(SignupRequest signupRequest){
 		User user = new User();
 
 		user.setUsername(signupRequest.getUsername());
 		user.setEmail(signupRequest.getEmail());
-		user.setDriverLicense(signupRequest.getDriverLicense());
-		user.setAddress(signupRequest.getAddress());
-		user.setGender(Gender.valueOf(signupRequest.getGender()));
-		user.setDob(signupRequest.getDob());
 		user.setPhone(signupRequest.getPhone());
 		user.setRole(Role.USER);
 		user.setPassword(passwordEncoder.encode(signupRequest.getPassword()));
@@ -62,6 +59,7 @@ public class AuthenticationService implements IAuthenticationService {
 		JWTAuthenticationResponse jwtAuthenticationResponse = new JWTAuthenticationResponse();
 
 		jwtAuthenticationResponse.setToken(jwt);
+		jwtAuthenticationResponse.setUsername(user.getUsername());
 		jwtAuthenticationResponse.setRefreshToken(refreshToken);
 
 		return jwtAuthenticationResponse;

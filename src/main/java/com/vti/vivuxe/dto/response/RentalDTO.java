@@ -10,6 +10,7 @@ public class RentalDTO {
 	private Long rentalId;
 	private Date rentalDate;
 	private Date rentalReturn;
+	private double rentalCost;
 	private String status;
 	private UserResponse userResponse;
 	private CarResponse carResponse;
@@ -22,6 +23,7 @@ public class RentalDTO {
 		this.rentalId = rental.getRentalId();
 		this.rentalDate = rental.getRentalDate();
 		this.rentalReturn = rental.getRentalReturn();
+		this.rentalCost = rental.getRentalCost();
 		this.status = rental.getStatus().name();
 		this.userResponse = new UserResponse(rental.getUser());
 		this.carResponse = new CarResponse(rental.getCar());
