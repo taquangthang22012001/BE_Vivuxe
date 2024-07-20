@@ -105,6 +105,9 @@ public class Car {
 	@JoinColumn(name = "user_id", nullable = false, referencedColumnName = "user_id")
 	private User user;
 
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.ALL)
+//	private List<CarImage> carImageList;
+
 	@PrePersist
 	protected void onCreate() {
 		if (this.createDate == null) {

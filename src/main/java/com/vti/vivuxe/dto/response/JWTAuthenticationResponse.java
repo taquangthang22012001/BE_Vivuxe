@@ -9,4 +9,6 @@ public class JWTAuthenticationResponse {
 	private String username;
 
 	private String refreshToken;
+
+	private Long userId;
 }

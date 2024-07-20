@@ -1,6 +1,7 @@
 package com.vti.vivuxe.controller;
 
 import com.vti.vivuxe.dto.request.UserCreationRequest;
+import com.vti.vivuxe.dto.request.UserUpdateRequest;
 import com.vti.vivuxe.service.User.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class UserController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateUser(@PathVariable long id, @RequestBody @Valid UserCreationRequest request) {
+	public ResponseEntity<?> updateUser(@PathVariable long id, @RequestBody @Valid UserUpdateRequest request) {
 		return new ResponseEntity<>(userService.updateUser(id, request), HttpStatus.OK);
 	}
 

@@ -2,10 +2,8 @@ package com.vti.vivuxe.service.Authentication;
 
 import com.vti.vivuxe.dto.request.SigninRequest;
 import com.vti.vivuxe.dto.request.SignupRequest;
-import com.vti.vivuxe.dto.request.UserCreationRequest;
 import com.vti.vivuxe.dto.response.JWTAuthenticationResponse;
 import com.vti.vivuxe.entity.User;
-import com.vti.vivuxe.enums.Gender;
 import com.vti.vivuxe.enums.Role;
 import com.vti.vivuxe.repository.UserRepository;
 import com.vti.vivuxe.service.JWT.JWTService;
@@ -61,6 +59,8 @@ public class AuthenticationService implements IAuthenticationService {
 		jwtAuthenticationResponse.setToken(jwt);
 		jwtAuthenticationResponse.setUsername(user.getUsername());
 		jwtAuthenticationResponse.setRefreshToken(refreshToken);
+		jwtAuthenticationResponse.setUserId(user.getUserId());
+
 
 		return jwtAuthenticationResponse;
 	}

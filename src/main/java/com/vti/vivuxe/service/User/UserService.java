@@ -1,8 +1,10 @@
 package com.vti.vivuxe.service.User;
 
 import com.vti.vivuxe.dto.request.UserCreationRequest;
+import com.vti.vivuxe.dto.request.UserUpdateRequest;
 import com.vti.vivuxe.dto.response.UserDTO;
 import com.vti.vivuxe.entity.User;
+import com.vti.vivuxe.enums.Gender;
 import com.vti.vivuxe.repository.UserRepository;
 import com.vti.vivuxe.service.User.IUserService;
 import lombok.RequiredArgsConstructor;
@@ -68,11 +70,34 @@ public class UserService implements IUserService {
 		return modelMapper.map(existingUser, UserDTO.class);
 	}
 
-	public User updateUser(Long id, UserCreationRequest request) {
+	public User updateUser(Long id, UserUpdateRequest request) {
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new NoSuchElementException("User not found with " + id));
 
-		modelMapper.map(request, user);
+		// Manually map non-null properties
+		if (request.getEmail() != null) {
+			user.setEmail(request.getEmail());
+		}
+
+		if (request.getPassword() != null) {
+			user.setEmail(request.getPassword());
+		}
+
+		if (request.getPhone() != null) {
+			user.setPhone(request.getPhone());
+		}
+		if (request.getDob() != null) {
+			user.setDob(request.getDob());
+		}
+		if (request.getDriverLicense() != null) {
+			user.setDriverLicense(request.getDriverLicense());
+		}
+		if (request.getAddress() != null) {
+			user.setAddress(request.getAddress());
+		}
+		if (request.getGender() != null) {
+			user.setGender(Gender.valueOf(request.getGender()));
+		}
 
 		return userRepository.save(user);
 	}

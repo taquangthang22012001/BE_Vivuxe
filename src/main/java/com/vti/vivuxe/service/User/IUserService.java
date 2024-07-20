@@ -1,6 +1,7 @@
 package com.vti.vivuxe.service.User;
 
 import com.vti.vivuxe.dto.request.UserCreationRequest;
+import com.vti.vivuxe.dto.request.UserUpdateRequest;
 import com.vti.vivuxe.dto.response.UserDTO;
 import com.vti.vivuxe.entity.User;
 import org.springframework.data.domain.Page;
@@ -12,7 +13,7 @@ public interface IUserService {
 	Page<UserDTO> getAllUsers(Pageable pageable);
 	UserDTO getUserById(Long id);
 	void createUser(UserCreationRequest request);
-	User updateUser(Long id, UserCreationRequest request);
+	User updateUser(Long id, UserUpdateRequest request);
 	void deleteUser(Long id);
 	UserDetailsService userDetailsService();
 }
