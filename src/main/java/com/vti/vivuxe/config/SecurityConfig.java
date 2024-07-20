@@ -2,6 +2,7 @@ package com.vti.vivuxe.config;
 
 import com.vti.vivuxe.enums.Role;
 import com.vti.vivuxe.service.User.CustomUserDetailsService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -22,7 +24,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfiguration {
+public class SecurityConfig {
 	@Autowired
 	private JWTAuthenticationFilter jwtAuthenticationFilter;
 
@@ -34,6 +36,21 @@ public class SecurityConfiguration {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		try {
 			http.csrf(AbstractHttpConfigurer::disable)
+//					.exceptionHandling(i -> i.authenticationEntryPoint((request, response, ex) -> {
+// 						if (Objects.equals("403", String.valueOf(response.getStatus()))) {
+//							response.sendError(
+//									HttpServletResponse.SC_FORBIDDEN, ex.getMessage()
+//							);
+//						} else if (Objects.equals("401", String.valueOf(response.getStatus()))) {
+//							response.sendError(
+//									HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage()
+//							);
+//						} else {
+//							response.sendError(
+//									response.getStatus(), ex.getMessage()
+//							);
+//						}
+//					}))
 					.authorizeRequests(authorizeRequests ->
 							authorizeRequests
 									.requestMatchers("api/v1/auth/**").permitAll()

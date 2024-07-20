@@ -1,7 +1,7 @@
-package com.vti.vivuxe.dto.request;
+package com.vti.vivuxe.dto.request.update;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -9,8 +9,8 @@ import java.util.Date;
 
 @Data
 public class UserUpdateRequest {
-	@Size(min = 5, max = 20, message = "Username must be between 5 and 20 characters")
-	private String username;
+//	@Size(min = 5, max = 20, message = "Username must be between 5 and 20 characters")
+//	private String username;
 
 	@Size(min = 5, max = 20, message = "Password must be between 5 and 20 characters")
 	private String password;
@@ -25,6 +25,12 @@ public class UserUpdateRequest {
 
 	@Size(min = 5, max = 15, message = "Driver License must be between 5 and 15 characters")
 	private String driverLicense;
+
+	private String accountNumber;
+
+	private String fullName;
+
+	private String bankName;
 
 	private String address;
 

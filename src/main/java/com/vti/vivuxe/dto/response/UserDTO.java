@@ -16,6 +16,9 @@ public class UserDTO {
 	private String phone;
 	private Date dob;
 	private String driverLicense;
+	private String accountNumber;
+	private String fullName;
+	private String bankName;
 	private String address;
 	private Date createDate;
 	private String gender;
@@ -35,6 +38,9 @@ public class UserDTO {
 		this.phone = user.getPhone();
 		this.dob = user.getDob();
 		this.driverLicense = user.getDriverLicense();
+		this.accountNumber = user.getAccountNumber();
+		this.bankName = user.getBankName();
+		this.fullName = user.getFullName();
 		this.address = user.getAddress();
 		this.createDate = user.getCreateDate();
 		this.gender = user.getGender().name();

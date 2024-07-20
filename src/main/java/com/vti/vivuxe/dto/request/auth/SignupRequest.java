@@ -1,17 +1,12 @@
-package com.vti.vivuxe.dto.request;
+package com.vti.vivuxe.dto.request.auth;
 
-import com.vti.vivuxe.enums.Gender;
-import com.vti.vivuxe.enums.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.util.Date;
-
-
 @Data
-public class UserCreationRequest {
+public class SignupRequest {
 	@NotNull(message = "Username cannot be null")
 	@Size(min = 5, max = 20, message = "Username must be between 5 and 20 characters")
 	private String username;
@@ -26,16 +21,4 @@ public class UserCreationRequest {
 	@NotNull(message = "Phone number cannot be null")
 	@Size(min = 10, max = 11, message = "Phone number must be between 10 and 20 numbers")
 	private String phone;
-
-	private Date dob;
-
-	@NotNull(message = "Driver License cannot be null")
-	@Size(min = 5, max = 15, message = "Driver License must be between 5 and 15 characters")
-	private String driverLicense;
-
-	private String address;
-
-	private String gender;
-
-	private String role;
 }

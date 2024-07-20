@@ -1,4 +1,4 @@
-package com.vti.vivuxe.dto.request;
+package com.vti.vivuxe.dto.request.auth;
 
 import lombok.Data;
 

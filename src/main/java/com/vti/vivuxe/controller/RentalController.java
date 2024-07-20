@@ -1,6 +1,6 @@
 package com.vti.vivuxe.controller;
 
-import com.vti.vivuxe.dto.request.RentalCreationRequest;
+import com.vti.vivuxe.dto.request.create.RentalCreationRequest;
 import com.vti.vivuxe.service.Rental.RentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;

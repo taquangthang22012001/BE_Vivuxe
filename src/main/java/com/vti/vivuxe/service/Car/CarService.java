@@ -1,12 +1,15 @@
 package com.vti.vivuxe.service.Car;
 
-import com.vti.vivuxe.dto.request.CarCreationRequest;
+import com.vti.vivuxe.dto.request.create.CarCreationRequest;
 import com.vti.vivuxe.dto.response.CarDTO;
-import com.vti.vivuxe.dto.response.UserResponse;
 import com.vti.vivuxe.entity.Car;
+import com.vti.vivuxe.entity.Image;
 import com.vti.vivuxe.entity.User;
 import com.vti.vivuxe.repository.CarRepository;
+import com.vti.vivuxe.repository.ImageRepository;
 import com.vti.vivuxe.repository.UserRepository;
+import com.vti.vivuxe.utils.PathUtil;
+import jakarta.annotation.PostConstruct;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +17,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.text.html.Option;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.Optional;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.function.Function;
 
 @Service
@@ -31,6 +36,18 @@ public class CarService implements ICarService {
 	private CarRepository carRepository;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private ImageRepository imageRepository;
+	@Autowired
+	private PathUtil pathUtil;
+
+//	private final String PATH = "D:\\VTI Academy\\Mock_VTI\\ViVuXe\\src\\main\\resources\\static\\images\\";
+	private String PATH;
+
+	@PostConstruct
+	public void init(){
+		this.PATH = pathUtil.getImagePath();
+	}
 
 	public Page<CarDTO> getAllCars(Pageable pageable) {
 
@@ -61,7 +78,7 @@ public class CarService implements ICarService {
 		return carDTO;
 	}
 
-	public void createCar(CarCreationRequest request) {
+	public void  createCar(CarCreationRequest request) throws IOException {
 		Car car = modelMapper.map(request, Car.class);
 
 		User u = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -76,6 +93,20 @@ public class CarService implements ICarService {
 		car.setUser(user);
 
 		carRepository.save(car);
+		// save image
+		// 1. luu aanh den satic/images\
+		List<Image> images = new ArrayList<>();
+		for (MultipartFile file: request.getImages()) {
+			// yyyyMMddHHmmss
+			Date date = new Date();
+			SimpleDateFormat formater = new SimpleDateFormat("yyyyMMddHHmmss");
+			String headName = formater.format(date);
+			Files.copy(file.getInputStream(), Path.of(PATH + headName + file.getOriginalFilename()));
+
+			Image image = new Image(PATH + headName + file.getOriginalFilename(), car);
+			images.add(image);
+		}
+		imageRepository.saveAll(images);
 	}
 
 	public void updateCar(Long id, CarCreationRequest request) {

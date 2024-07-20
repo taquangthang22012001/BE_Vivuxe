@@ -40,6 +40,14 @@ public class User implements UserDetails {
 
 	private String address;
 
+	@Column(name = "account_number")
+	private String accountNumber;
+
+	private String fullName;
+
+	@Column(name = "bank_name")
+	private String bankName;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "create_date")
 	private Date createDate;

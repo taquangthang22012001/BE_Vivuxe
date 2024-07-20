@@ -1,4 +1,4 @@
-package com.vti.vivuxe.dto.request;
+package com.vti.vivuxe.dto.request.create;
 
 import com.vti.vivuxe.entity.Rental;
 import com.vti.vivuxe.entity.User;
@@ -7,6 +7,7 @@ import com.vti.vivuxe.enums.Status;
 import com.vti.vivuxe.enums.Transmission;
 import jakarta.persistence.Column;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 @Data
@@ -43,6 +44,8 @@ public class CarCreationRequest {
     private Boolean airbags;
     private String status;
     private String description;
+
+    private MultipartFile[] images;
 //    private Long userId;
 }
 

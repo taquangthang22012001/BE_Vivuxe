@@ -15,6 +15,9 @@ public class UserResponse {
 	private Date dob;
 	private String driverLicense;
 	private String address;
+	private String accountNumber;
+	private String fullName;
+	private String bankName;
 	private Date createDate;
 	private String gender;
 	private String role;
@@ -29,6 +32,9 @@ public class UserResponse {
 		this.phone = user.getPhone();
 		this.dob = user.getDob();
 		this.driverLicense = user.getDriverLicense();
+		this.bankName = user.getBankName();
+		this.accountNumber = user.getAccountNumber();
+		this.fullName = user.getFullName();
 		this.address = user.getAddress();
 		this.createDate = user.getCreateDate();
 		this.gender = user.getGender().name();

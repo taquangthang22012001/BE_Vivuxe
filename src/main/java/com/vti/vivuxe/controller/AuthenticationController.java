@@ -1,9 +1,7 @@
 package com.vti.vivuxe.controller;
 
-import com.vti.vivuxe.dto.request.SigninRequest;
-import com.vti.vivuxe.dto.request.SignupRequest;
-import com.vti.vivuxe.dto.request.UserCreationRequest;
-import com.vti.vivuxe.dto.response.JWTAuthenticationResponse;
+import com.vti.vivuxe.dto.request.auth.SigninRequest;
+import com.vti.vivuxe.dto.request.auth.SignupRequest;
 import com.vti.vivuxe.entity.User;
 import com.vti.vivuxe.service.Authentication.AuthenticationService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +23,7 @@ public class AuthenticationController {
 	}
 
 	@PostMapping("/signin")
-	public ResponseEntity<JWTAuthenticationResponse> signin(@RequestBody SigninRequest request){
+	public ResponseEntity<?> signin(@RequestBody SigninRequest request){
 		return ResponseEntity.ok(authenticationService.signin(request));
 	}
 }

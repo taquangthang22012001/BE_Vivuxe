@@ -1,6 +1,6 @@
 package com.vti.vivuxe.service.Rental;
 
-import com.vti.vivuxe.dto.request.RentalCreationRequest;
+import com.vti.vivuxe.dto.request.create.RentalCreationRequest;
 import com.vti.vivuxe.dto.response.CarResponse;
 import com.vti.vivuxe.dto.response.RentalDTO;
 import com.vti.vivuxe.dto.response.UserResponse;

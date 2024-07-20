@@ -1,7 +1,7 @@
 package com.vti.vivuxe.service.User;
 
-import com.vti.vivuxe.dto.request.UserCreationRequest;
-import com.vti.vivuxe.dto.request.UserUpdateRequest;
+import com.vti.vivuxe.dto.request.create.UserCreationRequest;
+import com.vti.vivuxe.dto.request.update.UserUpdateRequest;
 import com.vti.vivuxe.dto.response.UserDTO;
 import com.vti.vivuxe.entity.User;
 import org.springframework.data.domain.Page;

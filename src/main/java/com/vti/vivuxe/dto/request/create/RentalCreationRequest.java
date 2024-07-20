@@ -1,4 +1,4 @@
-package com.vti.vivuxe.dto.request;
+package com.vti.vivuxe.dto.request.create;
 import com.vti.vivuxe.entity.Rental;
 import com.vti.vivuxe.enums.Status;
 

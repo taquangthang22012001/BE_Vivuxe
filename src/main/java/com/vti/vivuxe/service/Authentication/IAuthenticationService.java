@@ -1,7 +1,7 @@
 package com.vti.vivuxe.service.Authentication;
 
-import com.vti.vivuxe.dto.request.SigninRequest;
-import com.vti.vivuxe.dto.request.SignupRequest;
+import com.vti.vivuxe.dto.request.auth.SigninRequest;
+import com.vti.vivuxe.dto.request.auth.SignupRequest;
 import com.vti.vivuxe.dto.response.JWTAuthenticationResponse;
 import com.vti.vivuxe.entity.User;
 

@@ -1,7 +1,7 @@
 package com.vti.vivuxe.service.Authentication;
 
-import com.vti.vivuxe.dto.request.SigninRequest;
-import com.vti.vivuxe.dto.request.SignupRequest;
+import com.vti.vivuxe.dto.request.auth.SigninRequest;
+import com.vti.vivuxe.dto.request.auth.SignupRequest;
 import com.vti.vivuxe.dto.response.JWTAuthenticationResponse;
 import com.vti.vivuxe.entity.User;
 import com.vti.vivuxe.enums.Role;
@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -45,8 +47,9 @@ public class AuthenticationService implements IAuthenticationService {
 	}
 
 	public JWTAuthenticationResponse signin(SigninRequest request){
-		authenticationManager.authenticate(
+		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(request.getUsername(),request.getPassword()));
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		var user = userRepository.findByUsername(request.getUsername())
 				.orElseThrow(() -> new IllegalArgumentException("Invalid username or password."));

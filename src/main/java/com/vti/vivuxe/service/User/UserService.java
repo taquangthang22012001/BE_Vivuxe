@@ -1,20 +1,18 @@
 package com.vti.vivuxe.service.User;
 
-import com.vti.vivuxe.dto.request.UserCreationRequest;
-import com.vti.vivuxe.dto.request.UserUpdateRequest;
+import com.vti.vivuxe.dto.request.create.UserCreationRequest;
+import com.vti.vivuxe.dto.request.update.UserUpdateRequest;
 import com.vti.vivuxe.dto.response.UserDTO;
 import com.vti.vivuxe.entity.User;
 import com.vti.vivuxe.enums.Gender;
+import com.vti.vivuxe.enums.Role;
 import com.vti.vivuxe.repository.UserRepository;
-import com.vti.vivuxe.service.User.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -78,11 +76,9 @@ public class UserService implements IUserService {
 		if (request.getEmail() != null) {
 			user.setEmail(request.getEmail());
 		}
-
 		if (request.getPassword() != null) {
-			user.setEmail(request.getPassword());
+			user.setPassword(request.getPassword());
 		}
-
 		if (request.getPhone() != null) {
 			user.setPhone(request.getPhone());
 		}
@@ -92,11 +88,23 @@ public class UserService implements IUserService {
 		if (request.getDriverLicense() != null) {
 			user.setDriverLicense(request.getDriverLicense());
 		}
+		if(request.getAccountNumber() != null){
+			user.setAccountNumber(request.getAccountNumber());
+		}
+		if(request.getFullName() != null){
+			user.setFullName(request.getFullName());
+		}
+		if(request.getBankName() != null){
+			user.setBankName(request.getBankName());
+		}
 		if (request.getAddress() != null) {
 			user.setAddress(request.getAddress());
 		}
 		if (request.getGender() != null) {
 			user.setGender(Gender.valueOf(request.getGender()));
+		}
+		if(request.getRole() != null){
+			user.setRole(Role.valueOf(request.getRole()));
 		}
 
 		return userRepository.save(user);

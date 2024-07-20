@@ -6,6 +6,7 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class CarDTO {
@@ -45,6 +46,7 @@ public class CarDTO {
     private String description;
 //    private UserResponse userResponse;
 //    private List<RentalDTO> rentals;
+    private List<ImageDTO> imageDTOS;
 
 
     public CarDTO() {
@@ -89,5 +91,7 @@ public class CarDTO {
 //            rentalDTOS.add(new RentalDTO(rental));
 //        }
 //        this.rentals = rentalDTOS;
+        this.imageDTOS = car.getImages().stream().map(ImageDTO::new).collect(Collectors.toList());
+
     }
 }

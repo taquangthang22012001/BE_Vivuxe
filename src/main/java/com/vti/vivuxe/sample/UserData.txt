@@ -1,208 +1,151 @@
-[
-    {
-        "username": "john_doe",
-        "password": "password123",
-        "email": "john_doe@example.com",
-        "phone": "5551234567",
-        "dob": "2024-06-25",
-        "driverLicense": "D1234567",
-        "address": "123 Main St, New York, NY 10001",
-        "gender": "MALE"
-    },
-    {
-        "username": "jane_smith",
-        "password": "password789",
-        "email": "jane_smith@example.com",
-        "phone": "5558765432",
-        "dob": "1995-04-15",
-        "driverLicense": "D1234568",
-        "address": "789 Maple Ave, New York, NY 10003",
-        "gender": "FEMALE"
-    },
-    {
-        "username": "michael_jones",
-        "password": "mikepassword123",
-        "email": "michael_jones@example.com",
-        "phone": "5553456789",
-        "dob": "1988-12-12",
-        "driverLicense": "D2345678",
-        "address": "321 Oak St, New York, NY 10004",
-        "gender": "MALE"
-    },
-    {
-        "username": "lisa_brown",
-        "password": "lisapassword456",
-        "email": "lisa_brown@example.com",
-        "phone": "5556543210",
-        "dob": "1992-08-02",
-        "driverLicense": "D3456789",
-        "address": "654 Pine Rd, New York, NY 10005",
-        "gender": "FEMALE"
-    },
-    {
-        "username": "william_davis",
-        "password": "willyd789",
-        "email": "william_davis@example.com",
-        "phone": "5557890123",
-        "dob": "1975-03-19",
-        "driverLicense": "D4567890",
-        "address": "987 Cedar Blvd, New York, NY 10006",
-        "gender": "MALE"
-    },
-    {
-        "username": "emily_clark",
-        "password": "emilypassword123",
-        "email": "emily_clark@example.com",
-        "phone": "5550123456",
-        "dob": "1985-07-10",
-        "driverLicense": "D5678901",
-        "address": "321 Birch St, New York, NY 10007",
-        "gender": "FEMALE"
-    },
-    {
-        "username": "daniel_moore",
-        "password": "danpassword456",
-        "email": "daniel_moore@example.com",
-        "phone": "5552345678",
-        "dob": "1990-05-25",
-        "driverLicense": "D6789012",
-        "address": "456 Spruce Ln, New York, NY 10008",
-        "gender": "MALE"
-    },
-    {
-        "username": "sarah_miller",
-        "password": "sarahpassword789",
-        "email": "sarah_miller@example.com",
-        "phone": "5556789123",
-        "dob": "1999-05-21",
-        "driverLicense": "D7890123",
-        "address": "789 Walnut St, New York, NY 10009",
-        "gender": "FEMALE"
-    },
-    {
-        "username": "david_wilson",
-        "password": "davepassword123",
-        "email": "david_wilson@example.com",
-        "phone": "5559012345",
-        "dob": "1982-09-30",
-        "driverLicense": "D8901234",
-        "address": "987 Chestnut Ave, New York, NY 10010",
-        "gender": "MALE"
-    },
-    {
-        "username": "laura_jones",
-        "password": "laurapassword456",
-        "email": "laura_jones@example.com",
-        "phone": "5553456789",
-        "dob": "2001-05-25",
-        "driverLicense": "D9012345",
-        "address": "123 Palm Dr, New York, NY 10011",
-        "gender": "FEMALE"
-    }
-]
+{
+    "username": "JohnDoe123",
+    "password": "Password123",
+    "email": "john.doe@example.com",
+    "phone": "1234567890",
+    "dob": "1990-01-15",
+    "driverLicense": "D1234567",
+    "accountNumber": "1234567890123456",
+    "fullName": "John Doe",
+    "bankName": "Bank Of America",
+    "address": "123 Elm Street, Springfield, IL",
+    "gender": "Male",
+    "role": "USER"
+}
+
+{
+    "username": "JaneSmith89",
+    "password": "SecurePass1",
+    "email": "jane.smith@example.com",
+    "phone": "0987654321",
+    "dob": "1989-02-20",
+    "driverLicense": "S9876543",
+    "accountNumber": "6543210987654321",
+    "fullName": "Jane Smith",
+    "bankName": "Chase Bank",
+    "address": "456 Oak Street, Metropolis, NY",
+    "gender": "Female",
+    "role": "ADMIN"
+}
+
+{
+    "username": "MikeBrown99",
+    "password": "MyPassword99",
+    "email": "mike.brown@example.com",
+    "phone": "1122334455",
+    "dob": "1999-05-10",
+    "driverLicense": "B1122334",
+    "accountNumber": "1111222233334444",
+    "fullName": "Mike Brown",
+    "bankName": "Wells Fargo",
+    "address": "789 Pine Street, Gotham, NJ",
+    "gender": "Male",
+    "role": "USER"
+}
+
+{
+    "username": "AliceGreen77",
+    "password": "AlicePass77",
+    "email": "alice.green@example.com",
+    "phone": "6677889900",
+    "dob": "1977-07-25",
+    "driverLicense": "G6677889",
+    "accountNumber": "5555666677778888",
+    "fullName": "Alice Green",
+    "bankName": "Citibank",
+    "address": "101 Maple Street, Star City, CA",
+    "gender": "Female",
+    "role": "USER"
+}
+
+{
+    "username": "CharlieWhite55",
+    "password": "CharPass55",
+    "email": "charlie.white@example.com",
+    "phone": "2233445566",
+    "dob": "1955-09-30",
+    "driverLicense": "W2233445",
+    "accountNumber": "9999000011112222",
+    "fullName": "Charlie White",
+    "bankName": "Goldman Sachs",
+    "address": "202 Birch Street, Central City, TX",
+    "gender": "Male",
+    "role": "ADMIN"
+}
 
 
-----------------------------------UPDATE FIELDS---------------------------------------------
+==============================Update=================================
+{
+    "username": "JohnDoe123",
+    "password": "NewPassword456",
+    "email": "john.doe.updated@example.com",
+    "phone": "1234567891",
+    "dob": "1990-01-15",
+    "driverLicense": "D1234567",
+    "accountNumber": "1234567890123457",
+    "fullName": "John Doe",
+    "bankName": "Bank Of America",
+    "address": "123 Elm Street, Springfield, IL",
+    "gender": "Male",
+    "role": "USER"
+}
 
-[
-    {
-        "username": "john_doe_updated",
-        "password": "newpassword456",
-        "email": "john_doe_updated@example.com",
-        "phone": "5551234567",
-        "dob": "2024-06-25",
-        "driverLicense": "D1234567",
-        "address": "456 Elm St, New York, NY 10002",
-        "gender": "MALE"
-    },
-    {
-        "username": "jane_smith_updated",
-        "password": "newpassword123",
-        "email": "jane_smith_updated@example.com",
-        "phone": "5558765432",
-        "dob": "1995-04-15",
-        "driverLicense": "D1234568",
-        "address": "321 Maple Ave, New York, NY 10003",
-        "gender": "FEMALE"
-    },
-    {
-        "username": "michael_jones_updated",
-        "password": "mikenewpassword789",
-        "email": "michael_jones_updated@example.com",
-        "phone": "5553456789",
-        "dob": "1988-12-12",
-        "driverLicense": "D2345678",
-        "address": "654 Oak St, New York, NY 10004",
-        "gender": "MALE"
-    },
-    {
-        "username": "lisa_brown_updated",
-        "password": "lisanewpassword456",
-        "email": "lisa_brown_updated@example.com",
-        "phone": "5556543210",
-        "dob": "1992-08-02",
-        "driverLicense": "D3456789",
-        "address": "987 Pine Rd, New York, NY 10005",
-        "gender": "FEMALE"
-    },
-    {
-        "username": "william_davis_updated",
-        "password": "willydnew456",
-        "email": "william_davis_updated@example.com",
-        "phone": "5557890123",
-        "dob": "1975-03-19",
-        "driverLicense": "D4567890",
-        "address": "123 Cedar Blvd, New York, NY 10006",
-        "gender": "MALE"
-    },
-    {
-        "username": "emily_clark_updated",
-        "password": "emilynewpassword123",
-        "email": "emily_clark_updated@example.com",
-        "phone": "5550123456",
-        "dob": "1985-07-10",
-        "driverLicense": "D5678901",
-        "address": "456 Birch St, New York, NY 10007",
-        "gender": "FEMALE"
-    },
-    {
-        "username": "daniel_moore_updated",
-        "password": "dannewpassword456",
-        "email": "daniel_moore_updated@example.com",
-        "phone": "5552345678",
-        "dob": "1990-05-25",
-        "driverLicense": "D6789012",
-        "address": "789 Spruce Ln, New York, NY 10008",
-        "gender": "MALE"
-    },
-    {
-        "username": "sarah_miller_updated",
-        "password": "sarahnewpassword789",
-        "email": "sarah_miller_updated@example.com",
-        "phone": "5556789123",
-        "dob": "1999-05-21",
-        "driverLicense": "D7890123",
-        "address": "987 Walnut St, New York, NY 10009",
-        "gender": "FEMALE"
-    },
-    {
-        "username": "david_wilson_updated",
-        "password": "davenewpassword123",
-        "email": "david_wilson_updated@example.com",
-        "phone": "5559012345",
-        "dob": "1982-09-30",
-        "driverLicense": "D8901234",
-        "address": "123 Chestnut Ave, New York, NY 10010",
-        "gender": "MALE"
-    },
-    {
-        "username": "laura_jones_updated",
-        "password": "lauranewpassword456",
-        "email": "laura_jones_updated@example.com",
-        "phone": "5553456789",
-        "dob": "2001-05-25",
-        "driverLicense": "D9012345",
-        "address": "456 Palm Dr, New York, NY 10011",
-        "gender": "FEMALE"
-    }
-]
+{
+    "username": "JaneSmith89",
+    "password": "UpdatedSecurePass2",
+    "email": "jane.smith.updated@example.com",
+    "phone": "0987654322",
+    "dob": "1989-02-20",
+    "driverLicense": "S9876543",
+    "accountNumber": "6543210987654322",
+    "fullName": "Jane Smith",
+    "bankName": "Chase Bank",
+    "address": "456 Oak Street, Metropolis, NY",
+    "gender": "Female",
+    "role": "ADMIN"
+}
+
+{
+    "username": "MikeBrown99",
+    "password": "UpdatedPassword100",
+    "email": "mike.brown.updated@example.com",
+    "phone": "1122334456",
+    "dob": "1999-05-10",
+    "driverLicense": "B1122334",
+    "accountNumber": "1111222233334445",
+    "fullName": "Mike Brown",
+    "bankName": "Wells Fargo",
+    "address": "789 Pine Street, Gotham, NJ",
+    "gender": "Male",
+    "role": "USER"
+}
+
+{
+    "username": "AliceGreen77",
+    "password": "UpdatedAlicePass78",
+    "email": "alice.green.updated@example.com",
+    "phone": "6677889901",
+    "dob": "1977-07-25",
+    "driverLicense": "G6677889",
+    "accountNumber": "5555666677778889",
+    "fullName": "Alice Green",
+    "bankName": "Citibank",
+    "address": "101 Maple Street, Star City, CA",
+    "gender": "Female",
+    "role": "USER"
+}
+
+{
+    "username": "CharlieWhite55",
+    "password": "UpdatedCharPass56",
+    "email": "charlie.white.updated@example.com",
+    "phone": "2233445567",
+    "dob": "1955-09-30",
+    "driverLicense": "W2233445",
+    "accountNumber": "9999000011112223",
+    "fullName": "Charlie White",
+    "bankName": "Goldman Sachs",
+    "address": "202 Birch Street, Central City, TX",
+    "gender": "Male",
+    "role": "ADMIN"
+}

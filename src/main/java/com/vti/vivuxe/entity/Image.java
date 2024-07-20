@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class CarImage {
+public class Image {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -15,7 +15,12 @@ public class CarImage {
 	@Column(name = "car_image_path")
 	private String carImagePath;
 
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "car_id", nullable = false, referencedColumnName = "car_id")
-//	private Car car;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "car_id", referencedColumnName = "car_id")
+	private Car car;
+
+	public Image(String carImagePath, Car car) {
+		this.carImagePath = carImagePath;
+		this.car = car;
+	}
 }
