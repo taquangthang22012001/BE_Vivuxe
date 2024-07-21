@@ -2,6 +2,7 @@ package com.vti.vivuxe.service.Car;
 
 import com.vti.vivuxe.dto.request.create.CarCreationRequest;
 import com.vti.vivuxe.dto.response.CarDTO;
+import com.vti.vivuxe.dto.response.ImageDTO;
 import com.vti.vivuxe.entity.Car;
 import com.vti.vivuxe.entity.Image;
 import com.vti.vivuxe.entity.User;
@@ -26,6 +27,7 @@ import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -77,6 +79,9 @@ public class CarService implements ICarService {
 
 		CarDTO carDTO = modelMapper.map(existingCar, CarDTO.class);
 
+		carDTO.setImageDTOS(existingCar.getImages().stream()
+				.map(ImageDTO::new)
+				.collect(Collectors.toList()));
 
 		return carDTO;
 	}
