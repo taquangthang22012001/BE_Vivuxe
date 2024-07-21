@@ -20,8 +20,7 @@ public class CarController {
 	@Autowired
 	private ICarService carService;
 
-	@GetMapping()
-
+	@GetMapping("/getall")
 	public Page<CarDTO> getAllCars(Pageable pageable) {
 		return carService.getAllCars(pageable);
 	}

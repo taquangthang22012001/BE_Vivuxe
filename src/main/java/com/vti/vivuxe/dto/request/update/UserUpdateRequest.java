@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
@@ -21,7 +22,7 @@ public class UserUpdateRequest {
 	@Size(min = 10, max = 11, message = "Phone number must be between 10 and 20 numbers")
 	private String phone;
 
-	private Date dob;
+//	private String dob;
 
 	@Size(min = 5, max = 15, message = "Driver License must be between 5 and 15 characters")
 	private String driverLicense;
@@ -37,4 +38,6 @@ public class UserUpdateRequest {
 	private String gender;
 
 	private String role;
+
+	private MultipartFile image;
 }

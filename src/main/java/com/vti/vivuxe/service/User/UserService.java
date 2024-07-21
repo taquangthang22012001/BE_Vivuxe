@@ -3,10 +3,15 @@ package com.vti.vivuxe.service.User;
 import com.vti.vivuxe.dto.request.create.UserCreationRequest;
 import com.vti.vivuxe.dto.request.update.UserUpdateRequest;
 import com.vti.vivuxe.dto.response.UserDTO;
+import com.vti.vivuxe.entity.Image;
 import com.vti.vivuxe.entity.User;
 import com.vti.vivuxe.enums.Gender;
 import com.vti.vivuxe.enums.Role;
+import com.vti.vivuxe.repository.ImageRepository;
 import com.vti.vivuxe.repository.UserRepository;
+import com.vti.vivuxe.service.File.FileService;
+import com.vti.vivuxe.utils.PathUtil;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +19,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.function.Function;
@@ -31,6 +40,19 @@ public class UserService implements IUserService {
 	@Autowired
 	private CustomUserDetailsService customUserDetailsService;
 
+	@Autowired
+	private ImageRepository imageRepository;
+
+	@Autowired
+	private PathUtil pathUtil;
+
+	private String PATH;
+
+	@PostConstruct
+	public void init(){
+		this.PATH = pathUtil.getImagePath();
+	}
+
 	public Page<UserDTO> getAllUsers(Pageable pageable) {
 		Page<User> users = userRepository.findAll(pageable);
 
@@ -45,7 +67,7 @@ public class UserService implements IUserService {
 		return userDTOS;
 	}
 
-	public void createUser(UserCreationRequest request) {
+	public void createUser(UserCreationRequest request) throws IOException {
 		Boolean existingUser = userRepository.existsByUsername(request.getUsername());
 
 		if (existingUser) {
@@ -54,6 +76,7 @@ public class UserService implements IUserService {
 
 		User user = modelMapper.map(request, User.class);
 		userRepository.save(user);
+
 	}
 
 	public UserDTO getUserById(Long id) {
@@ -68,46 +91,51 @@ public class UserService implements IUserService {
 		return modelMapper.map(existingUser, UserDTO.class);
 	}
 
-	public User updateUser(Long id, UserUpdateRequest request) {
-		User user = userRepository.findById(id)
+	public void updateUser(Long id, UserUpdateRequest request) throws IOException {
+		User updateUser = userRepository.findById(id)
 				.orElseThrow(() -> new NoSuchElementException("User not found with " + id));
 
 		// Manually map non-null properties
 		if (request.getEmail() != null) {
-			user.setEmail(request.getEmail());
+			updateUser.setEmail(request.getEmail());
 		}
 		if (request.getPassword() != null) {
-			user.setPassword(request.getPassword());
+			updateUser.setPassword(request.getPassword());
 		}
 		if (request.getPhone() != null) {
-			user.setPhone(request.getPhone());
+			updateUser.setPhone(request.getPhone());
 		}
-		if (request.getDob() != null) {
-			user.setDob(request.getDob());
-		}
+//		if (request.getDob() != null) {
+//			updateUser.setDob(request.getDob());
+//		}
 		if (request.getDriverLicense() != null) {
-			user.setDriverLicense(request.getDriverLicense());
+			updateUser.setDriverLicense(request.getDriverLicense());
 		}
 		if(request.getAccountNumber() != null){
-			user.setAccountNumber(request.getAccountNumber());
+			updateUser.setAccountNumber(request.getAccountNumber());
 		}
 		if(request.getFullName() != null){
-			user.setFullName(request.getFullName());
+			updateUser.setFullName(request.getFullName());
 		}
 		if(request.getBankName() != null){
-			user.setBankName(request.getBankName());
+			updateUser.setBankName(request.getBankName());
 		}
 		if (request.getAddress() != null) {
-			user.setAddress(request.getAddress());
+			updateUser.setAddress(request.getAddress());
 		}
 		if (request.getGender() != null) {
-			user.setGender(Gender.valueOf(request.getGender()));
+			updateUser.setGender(Gender.valueOf(request.getGender()));
 		}
 		if(request.getRole() != null){
-			user.setRole(Role.valueOf(request.getRole()));
+			updateUser.setRole(Role.valueOf(request.getRole()));
 		}
 
-		return userRepository.save(user);
+		userRepository.save(updateUser);
+
+		if(request.getImage() != null){
+			Image image = FileService.saveUserFile(PATH, request.getImage() , updateUser);
+			imageRepository.save(image);
+		}
 	}
 
 	public void deleteUser(Long id) {

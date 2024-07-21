@@ -2,13 +2,15 @@ package com.vti.vivuxe.controller;
 
 import com.vti.vivuxe.dto.request.create.UserCreationRequest;
 import com.vti.vivuxe.dto.request.update.UserUpdateRequest;
-import com.vti.vivuxe.service.User.UserService;
+import com.vti.vivuxe.service.User.IUserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 
 @RestController
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
 	@Autowired
-	private UserService userService;
+	private IUserService userService;
 
 	@GetMapping()
 	public ResponseEntity<?> getAllUsers(Pageable pageable) {
@@ -30,14 +32,15 @@ public class UserController {
 	}
 
 	@PostMapping()
-	public ResponseEntity<?> createUser(@RequestBody @Valid UserCreationRequest request) {
+	public ResponseEntity<?> createUser(@RequestBody @Valid UserCreationRequest request) throws IOException {
 		userService.createUser(request);
 		return new ResponseEntity<>("User Created Successfully!", HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateUser(@PathVariable long id, @RequestBody @Valid UserUpdateRequest request) {
-		return new ResponseEntity<>(userService.updateUser(id, request), HttpStatus.OK);
+	public ResponseEntity<?> updateUser(@PathVariable long id, @Valid UserUpdateRequest request) throws IOException {
+		userService.updateUser(id, request);
+		return new ResponseEntity<>("User Updated Successfully!", HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")

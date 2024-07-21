@@ -8,6 +8,7 @@ import com.vti.vivuxe.entity.User;
 import com.vti.vivuxe.repository.CarRepository;
 import com.vti.vivuxe.repository.ImageRepository;
 import com.vti.vivuxe.repository.UserRepository;
+import com.vti.vivuxe.service.File.FileService;
 import com.vti.vivuxe.utils.PathUtil;
 import jakarta.annotation.PostConstruct;
 import lombok.NoArgsConstructor;
@@ -40,6 +41,8 @@ public class CarService implements ICarService {
 	private ImageRepository imageRepository;
 	@Autowired
 	private PathUtil pathUtil;
+	@Autowired
+	private FileService fileService;
 
 //	private final String PATH = "D:\\VTI Academy\\Mock_VTI\\ViVuXe\\src\\main\\resources\\static\\images\\";
 	private String PATH;
@@ -93,19 +96,10 @@ public class CarService implements ICarService {
 		car.setUser(user);
 
 		carRepository.save(car);
-		// save image
-		// 1. luu aanh den satic/images\
-		List<Image> images = new ArrayList<>();
-		for (MultipartFile file: request.getImages()) {
-			// yyyyMMddHHmmss
-			Date date = new Date();
-			SimpleDateFormat formater = new SimpleDateFormat("yyyyMMddHHmmss");
-			String headName = formater.format(date);
-			Files.copy(file.getInputStream(), Path.of(PATH + headName + file.getOriginalFilename()));
 
-			Image image = new Image(PATH + headName + file.getOriginalFilename(), car);
-			images.add(image);
-		}
+//		Xử lý ảnh
+		List<Image> images = FileService.saveCarFiles(PATH, request.getImages(), car);
+
 		imageRepository.saveAll(images);
 	}
 

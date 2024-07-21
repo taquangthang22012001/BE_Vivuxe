@@ -64,6 +64,9 @@ public class User implements UserDetails {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Car> cars;
 
+	@OneToOne(mappedBy = "user")
+	private Image image;
+
 
 	@PrePersist
 	protected void onCreate() {

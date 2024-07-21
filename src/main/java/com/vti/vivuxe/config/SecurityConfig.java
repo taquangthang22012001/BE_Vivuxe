@@ -54,12 +54,11 @@ public class SecurityConfig {
 					.authorizeRequests(authorizeRequests ->
 							authorizeRequests
 									.requestMatchers("api/v1/auth/**").permitAll()
-									.requestMatchers("/api/v1/users/**").hasAnyAuthority(Role.ADMIN.name(),
-											Role.USER.name())
-									.requestMatchers("/api/v1/cars/**").hasAnyAuthority(Role.ADMIN.name(),
-											Role.USER.name())
-									.requestMatchers("/api/v1/rentals/**").hasAnyAuthority(Role.ADMIN.name(),
-											Role.USER.name())
+									.requestMatchers("/api/v1/users/**").hasAnyAuthority(Role.ADMIN.name(), Role.USER.name())
+									.requestMatchers("/images/**").permitAll()
+									.requestMatchers("/api/v1/cars/getall").permitAll()  // Permit all requests specifically for getAllCars
+									.requestMatchers("/api/v1/cars/**").hasAnyAuthority(Role.ADMIN.name(), Role.USER.name())  // Require specific roles for other car endpoints
+									.requestMatchers("/api/v1/rentals/**").hasAnyAuthority(Role.ADMIN.name(), Role.USER.name())
 									.anyRequest().authenticated()
 					)
 					.sessionManagement(manager -> manager
