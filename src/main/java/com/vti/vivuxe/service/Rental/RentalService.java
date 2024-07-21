@@ -58,8 +58,10 @@ public class RentalService implements IRentalService {
 
 //		validate that objects from database are not found
 		User u = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
 		if (Objects.isNull(u))
 			new RuntimeException("User not found");
+
 		User user = userRepository.findById(u.getUserId())// nguoi dang nhap
 				.orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -82,15 +84,29 @@ public class RentalService implements IRentalService {
 	public Page<RentalDTO> getAllRentals(Pageable pageable) {
 		Page<Rental> rentalList = rentalRepository.findAll(pageable);
 
-		Page<RentalDTO> rentalDTOS = rentalList.map(new Function<Rental, RentalDTO>() {
-			@Override
-			public RentalDTO apply(Rental entity) {
-				RentalDTO dto = new RentalDTO(entity);
-				// Conversion logic
+//		Page<RentalDTO> rentalDTOS = rentalList.map(new Function<Rental, RentalDTO>() {
+//			@Override
+//			public RentalDTO apply(Rental entity) {
+//				RentalDTO dto = new RentalDTO(entity);
+//				// Conversion logic
+//				return dto;
+//			}
+//		});
 
-				return dto;
-			}
+		Page<RentalDTO> rentalDTOS = rentalList.map(rental -> {
+			Car car = rental.getCar();
+			// Access the user to ensure it's loaded
+			User user = car.getUser();
+			String ownerName = (user != null) ? user.getFullName() : "Unknown";
+
+			CarResponse carResponse = new CarResponse(car);
+			carResponse.setOwnerName(ownerName); // Make sure you have a setter for ownerName
+
+			RentalDTO dto = new RentalDTO(rental);
+			dto.setCarResponse(carResponse);
+			return dto;
 		});
+
 
 		return rentalDTOS;
 	}

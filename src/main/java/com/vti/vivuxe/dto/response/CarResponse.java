@@ -43,6 +43,7 @@ public class CarResponse {
 	private Boolean airbags;
 	private String status;
 	private String description;
+	private String ownerName;
 	private List<ImageDTO> imageDTOS;
 
 	public CarResponse() {
@@ -79,6 +80,12 @@ public class CarResponse {
 		this.status = car.getStatus().name();
 		this.description = car.getDescription();
 
+		this.ownerName = car.getUser() != null ? car.getUser().getFullName() : "Unknown";
+
 		this.imageDTOS = car.getImages().stream().map(ImageDTO::new).collect(Collectors.toList());
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
 	}
 }
