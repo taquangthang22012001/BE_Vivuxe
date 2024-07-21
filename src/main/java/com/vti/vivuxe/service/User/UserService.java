@@ -46,6 +46,8 @@ public class UserService implements IUserService {
 	@Autowired
 	private PathUtil pathUtil;
 
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
 	private String PATH;
 
 	@PostConstruct
@@ -105,9 +107,14 @@ public class UserService implements IUserService {
 		if (request.getPhone() != null) {
 			updateUser.setPhone(request.getPhone());
 		}
-//		if (request.getDob() != null) {
-//			updateUser.setDob(request.getDob());
-//		}
+		if (request.getDob() != null) {
+			try {
+				Date dob = dateFormat.parse(request.getDob()); // Convert String to Date
+				updateUser.setDob(dob);
+			} catch (Exception e) {
+				e.printStackTrace(); // Handle parsing exception
+			}
+		}
 		if (request.getDriverLicense() != null) {
 			updateUser.setDriverLicense(request.getDriverLicense());
 		}
@@ -153,6 +160,5 @@ public class UserService implements IUserService {
 	public UserDetailsService userDetailsService() {
 		return customUserDetailsService;
 	}
-
 
 }

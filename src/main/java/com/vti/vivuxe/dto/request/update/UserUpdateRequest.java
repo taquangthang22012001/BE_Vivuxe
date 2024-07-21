@@ -22,7 +22,7 @@ public class UserUpdateRequest {
 	@Size(min = 10, max = 11, message = "Phone number must be between 10 and 20 numbers")
 	private String phone;
 
-//	private String dob;
+	private String dob;
 
 	@Size(min = 5, max = 15, message = "Driver License must be between 5 and 15 characters")
 	private String driverLicense;

@@ -7,7 +7,6 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
 public class UserDTO {
@@ -24,7 +23,7 @@ public class UserDTO {
 	private Date createDate;
 	private String gender;
 	private String role;
-//	private List<RentalDTO> rentals;
+	//	private List<RentalDTO> rentals;
 	private List<CarDTO> cars;
 	private ImageDTO imageDTO;
 
@@ -47,7 +46,11 @@ public class UserDTO {
 		this.createDate = user.getCreateDate();
 		this.gender = user.getGender().name();
 		this.role = user.getRole().name();
-//		this.imageDTO = user.getImage();
+
+
+		if (user.getImage() != null) {
+			this.imageDTO = new ImageDTO(user.getImage());
+		}
 
 
 ////        Tạo 1 list rental DTOS rỗng
@@ -60,7 +63,7 @@ public class UserDTO {
 
 
 		List<CarDTO> carDTOS = new ArrayList<>();
-		for(Car car : user.getCars()){
+		for (Car car : user.getCars()) {
 			carDTOS.add(new CarDTO(car));
 		}
 		this.cars = carDTOS;
