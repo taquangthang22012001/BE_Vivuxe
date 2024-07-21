@@ -27,10 +27,10 @@ public class FileService {
 		String fileName = headName + file.getOriginalFilename();
 
 		String filePath = PATH + fileName;
-
+		//luu file vao thu muc
 		Files.copy(file.getInputStream(), Path.of(filePath));
-
-		Image image = new Image(filePath, user);
+		// luu doi image
+		Image image = new Image(fileName, user);
 
 		return image;
 	}
@@ -49,7 +49,7 @@ public class FileService {
 
 			Files.copy(file.getInputStream(), Path.of(filePath));
 
-			Image image = new Image(filePath, car);
+			Image image = new Image(fileName, car);
 			images.add(image);
 		}
 		return images;

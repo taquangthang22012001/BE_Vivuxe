@@ -4,6 +4,8 @@ import com.vti.vivuxe.entity.Car;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class CarResponse {
@@ -41,6 +43,7 @@ public class CarResponse {
 	private Boolean airbags;
 	private String status;
 	private String description;
+	private List<ImageDTO> imageDTOS;
 
 	public CarResponse() {
 	}
@@ -75,5 +78,7 @@ public class CarResponse {
 		this.airbags = car.getAirbags();
 		this.status = car.getStatus().name();
 		this.description = car.getDescription();
+
+		this.imageDTOS = car.getImages().stream().map(ImageDTO::new).collect(Collectors.toList());
 	}
 }

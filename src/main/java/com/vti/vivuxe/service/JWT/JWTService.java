@@ -25,9 +25,10 @@ public class JWTService implements IJWTService {
 	}
 
 	public String generateRefreshToken(Map<String, Object> extractClaims, UserDetails userDetails){
+		long now = System.currentTimeMillis();
 		return Jwts.builder().setClaims(extractClaims).setSubject(userDetails.getUsername())
 				.setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + 604800000))
+				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))
 				.signWith(getSigningKey(), SignatureAlgorithm.HS256)
 				.compact();
 	}

@@ -3,7 +3,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PathUtil {
-	private String imagePath = "src\\main\\resources\\static\\images\\";
+	private String imagePath = "D:\\VTI Academy\\Mock_VTI\\FE\\ViVuXe\\public\\images\\";
 
 	public String getImagePath() {
 		return imagePath;

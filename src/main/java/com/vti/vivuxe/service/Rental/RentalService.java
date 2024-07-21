@@ -2,6 +2,7 @@ package com.vti.vivuxe.service.Rental;
 
 import com.vti.vivuxe.dto.request.create.RentalCreationRequest;
 import com.vti.vivuxe.dto.response.CarResponse;
+import com.vti.vivuxe.dto.response.ImageDTO;
 import com.vti.vivuxe.dto.response.RentalDTO;
 import com.vti.vivuxe.dto.response.UserResponse;
 import com.vti.vivuxe.entity.Car;
@@ -26,6 +27,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -155,8 +157,14 @@ public class RentalService implements IRentalService {
 			carResponse.setStatus(car.getStatus().name());
 			carResponse.setDescription(car.getDescription());
 
+			carResponse.setImageDTOS(car.getImages().stream()
+					.map(ImageDTO::new)
+					.collect(Collectors.toList()));
+
 			// Map other fields if needed
 			rentalDTO.setCarResponse(carResponse);
+
+
 		}
 
 		return rentalDTO;
