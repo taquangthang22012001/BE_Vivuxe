@@ -100,7 +100,7 @@ public class RentalService implements IRentalService {
 			String ownerName = (user != null) ? user.getFullName() : "Unknown";
 
 			CarResponse carResponse = new CarResponse(car);
-			carResponse.setOwnerName(ownerName); // Make sure you have a setter for ownerName
+			carResponse.setOwnerName(ownerName);
 
 			RentalDTO dto = new RentalDTO(rental);
 			dto.setCarResponse(carResponse);
@@ -125,6 +125,7 @@ public class RentalService implements IRentalService {
 
 		// Map User to UserResponse
 		User user = existingRental.getUser();
+
 		if (user != null) {
 			UserResponse userResponse = new UserResponse();
 			userResponse.setUserId(user.getUserId());
@@ -172,14 +173,16 @@ public class RentalService implements IRentalService {
 			carResponse.setSpareTire(car.getSpareTire());
 			carResponse.setStatus(car.getStatus().name());
 			carResponse.setDescription(car.getDescription());
+			carResponse.setOwnerName(car.getUser().getFullName());
 
 			carResponse.setImageDTOS(car.getImages().stream()
 					.map(ImageDTO::new)
 					.collect(Collectors.toList()));
 
+
+
 			// Map other fields if needed
 			rentalDTO.setCarResponse(carResponse);
-
 
 		}
 

@@ -43,7 +43,9 @@ public class CarResponse {
 	private Boolean airbags;
 	private String status;
 	private String description;
+//	Lấy tên chủ xe
 	private String ownerName;
+//	Lấy list ảnh của xe
 	private List<ImageDTO> imageDTOS;
 
 	public CarResponse() {
@@ -85,7 +87,7 @@ public class CarResponse {
 		this.imageDTOS = car.getImages().stream().map(ImageDTO::new).collect(Collectors.toList());
 	}
 
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
-	}
+//	public void setOwnerName(String ownerName) {
+//		this.ownerName = ownerName;
+//	}
 }
