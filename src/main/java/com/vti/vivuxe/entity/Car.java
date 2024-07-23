@@ -2,7 +2,6 @@ package com.vti.vivuxe.entity;
 
 import com.vti.vivuxe.enums.Fuel;
 import com.vti.vivuxe.enums.Make;
-import com.vti.vivuxe.enums.Status;
 import com.vti.vivuxe.enums.Transmission;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -92,10 +91,6 @@ public class Car {
 
 	private Boolean airbags;
 
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
-	private Status status;
-
 	private String description;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.ALL)
@@ -112,9 +107,6 @@ public class Car {
 	protected void onCreate() {
 		if (this.createDate == null) {
 			this.createDate = new Date();
-		}
-		if (this.status == null) {
-			this.status = Status.Available;
 		}
 	}
 }

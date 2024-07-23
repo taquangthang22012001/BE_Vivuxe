@@ -19,13 +19,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -46,11 +45,11 @@ public class CarService implements ICarService {
 	@Autowired
 	private FileService fileService;
 
-//	private final String PATH = "D:\\VTI Academy\\Mock_VTI\\ViVuXe\\src\\main\\resources\\static\\images\\";
+	//	private final String PATH = "D:\\VTI Academy\\Mock_VTI\\ViVuXe\\src\\main\\resources\\static\\images\\";
 	private String PATH;
 
 	@PostConstruct
-	public void init(){
+	public void init() {
 		this.PATH = pathUtil.getImagePath();
 	}
 
@@ -71,7 +70,7 @@ public class CarService implements ICarService {
 	public CarDTO getCarById(Long id) {
 		Optional<Car> optionalCar = carRepository.findById(id);
 
-		if(optionalCar.isEmpty()){
+		if (optionalCar.isEmpty()) {
 			throw new RuntimeException("Car not found with id: " + id);
 		}
 
@@ -86,7 +85,7 @@ public class CarService implements ICarService {
 		return carDTO;
 	}
 
-	public void  createCar(CarCreationRequest request) throws IOException {
+	public void createCar(CarCreationRequest request) throws IOException {
 		Car car = modelMapper.map(request, Car.class);
 
 		User u = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

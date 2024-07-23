@@ -81,7 +81,6 @@ public class CarDTO {
         this.dvdScreen = car.getDvdScreen();
         this.etc = car.getEtc();
         this.airbags = car.getAirbags();
-        this.status = car.getStatus().name();
         this.description = car.getDescription();
 //        this.userResponse = new UserResponse(car.getUser());
 

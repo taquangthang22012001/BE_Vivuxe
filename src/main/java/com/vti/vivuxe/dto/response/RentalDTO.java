@@ -24,7 +24,6 @@ public class RentalDTO {
 		this.rentalDate = rental.getRentalDate();
 		this.rentalReturn = rental.getRentalReturn();
 		this.rentalCost = rental.getRentalCost();
-		this.status = rental.getStatus().name();
 		this.userResponse = new UserResponse(rental.getUser());
 		this.carResponse = new CarResponse(rental.getCar());
 	}

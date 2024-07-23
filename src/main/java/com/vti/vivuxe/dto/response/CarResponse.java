@@ -45,6 +45,12 @@ public class CarResponse {
 	private String description;
 //	Lấy tên chủ xe
 	private String ownerName;
+//	Lấy tên số điện thoại chủ xe
+	private String ownerPhone;
+//	Lấy số tài khoản của chủ xe
+	private String ownerAccountNumber;
+//	Lấy tên ngân hàng của chủ xe
+	private String ownerBankName;
 //	Lấy list ảnh của xe
 	private List<ImageDTO> imageDTOS;
 
@@ -79,10 +85,15 @@ public class CarResponse {
 		this.dvdScreen = car.getDvdScreen();
 		this.etc = car.getEtc();
 		this.airbags = car.getAirbags();
-		this.status = car.getStatus().name();
 		this.description = car.getDescription();
 
-		this.ownerName = car.getUser() != null ? car.getUser().getFullName() : "Unknown";
+		this.ownerName = car.getUser() != null ? car.getUser().getFullName() : null;
+
+		this.ownerBankName = car.getUser() != null ? car.getUser().getBankName() : null;
+
+		this.ownerAccountNumber = car.getUser() != null ? car.getUser().getAccountNumber() : null;
+
+		this.ownerPhone = car.getUser() != null ? car.getUser().getPhone() : null;
 
 		this.imageDTOS = car.getImages().stream().map(ImageDTO::new).collect(Collectors.toList());
 	}

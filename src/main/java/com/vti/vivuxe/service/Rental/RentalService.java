@@ -97,10 +97,17 @@ public class RentalService implements IRentalService {
 			Car car = rental.getCar();
 			// Access the user to ensure it's loaded
 			User user = car.getUser();
-			String ownerName = (user != null) ? user.getFullName() : "Unknown";
+
+			String ownerName = (user != null) ? user.getFullName() : null;
+			String ownerAccountNumber = (user != null) ? user.getAccountNumber() : null;
+			String ownerPhone = (user != null) ? user.getPhone() : null;
+			String ownerBankName = (user != null) ? user.getBankName() : null;
 
 			CarResponse carResponse = new CarResponse(car);
 			carResponse.setOwnerName(ownerName);
+			carResponse.setOwnerAccountNumber(ownerAccountNumber);
+			carResponse.setOwnerPhone(ownerPhone);
+			carResponse.setOwnerBankName(ownerBankName);
 
 			RentalDTO dto = new RentalDTO(rental);
 			dto.setCarResponse(carResponse);
@@ -171,14 +178,16 @@ public class RentalService implements IRentalService {
 			carResponse.setUsb(car.getUsb());
 			carResponse.setSeat(car.getSeat());
 			carResponse.setSpareTire(car.getSpareTire());
-			carResponse.setStatus(car.getStatus().name());
 			carResponse.setDescription(car.getDescription());
+//			Lấy thông tin từ chủ xe
 			carResponse.setOwnerName(car.getUser().getFullName());
+			carResponse.setOwnerBankName(car.getUser().getBankName());
+			carResponse.setOwnerAccountNumber(car.getUser().getAccountNumber());
+			carResponse.setOwnerPhone(car.getUser().getPhone());
 
 			carResponse.setImageDTOS(car.getImages().stream()
 					.map(ImageDTO::new)
 					.collect(Collectors.toList()));
-
 
 
 			// Map other fields if needed
