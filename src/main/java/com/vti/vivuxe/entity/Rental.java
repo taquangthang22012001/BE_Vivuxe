@@ -33,4 +33,5 @@ public class Rental {
 	@JoinColumn(name = "car_id", nullable = false, referencedColumnName = "car_id")
 	private Car car;
 
+	// private String name;
 }
