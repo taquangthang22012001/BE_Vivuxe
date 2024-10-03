@@ -5,7 +5,7 @@ spring:
     password: thang220101
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
       format_sql: true
     show-sql: true
     properties:
